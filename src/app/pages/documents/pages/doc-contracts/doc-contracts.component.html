@@ -1,0 +1,34 @@
+<ng-container *transloco="let t">
+  @if (showTable()) {
+    <ped-table
+      [columns]="columns"
+      [data]="items()"
+      [isLoading]="isLoading()"
+      [pageSize]="10"
+      [emptyText]="t('document.application.emptyText')"
+      (pageIndexChange)="changePage($event)"
+      (onRenderClick)="onClick($event)"
+    />
+  } @else {
+    <ped-box-infinite
+      [showContent]="!!items().length"
+      [isLoading]="isLoading()"
+      [emptyTitle]="t('document.contract.emptyText')"
+      (loadMore)="slService.changePagination()"
+    >
+      @for (item of items(); track $index) {
+        @for (item of items(); track $index) {
+          <ped-doc-contract-card
+            [item]="item"
+            (clicked)="
+              onClick({
+                event: '',
+                row: item,
+              })
+            "
+          />
+        }
+      }
+    </ped-box-infinite>
+  }
+</ng-container>

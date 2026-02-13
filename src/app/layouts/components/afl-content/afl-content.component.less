@@ -1,0 +1,44 @@
+@import 'colors';
+@import 'mixins';
+
+:host {
+    width: 100%;
+    min-height: calc(60svh);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 24px;
+    border-radius: 24px;
+    background: @ped-grey-100;
+
+    .media(@media-sm, {
+        flex: 1;
+    });
+
+    .media(@media-sm, {
+        background: inherit;
+        padding: 0;
+    });
+
+    .buttons {
+        display: flex;
+        column-gap: 16px;
+        justify-content: flex-end;
+        margin-top: 20px;
+
+        .media(@media-sm, {
+            flex-direction: column-reverse;
+            justify-content: flex-start;
+            row-gap: 20px;
+        });
+
+        [nz-button] {
+            min-width: 150px;
+            
+            &.grey {
+                background: @ped-white-100;
+                border: 1px solid @ped-grey-200;
+                box-shadow: none;
+            }
+        }
+    }
+}

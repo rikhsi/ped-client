@@ -1,0 +1,39 @@
+<ng-container *transloco="let t">
+  <div class="infos">
+    <p class="title">{{ t("appeal.application_select.title") }}</p>
+    <p class="description">{{ t("appeal.application_select.description") }}</p>
+  </div>
+
+  <ng-container *transloco="let t">
+    <nz-radio-group
+      [formControl]="applicationControl"
+      class="radio-group"
+      [ngClass]="{ empty: !items()?.length }"
+    >
+      <div class="list">
+        @for (item of items(); track item.id) {
+          <label
+            nz-radio
+            [nzValue]="item.id"
+            [ngClass]="{ selected: applicationControl.value === item.id }"
+          >
+            <h3>{{ item.applicationNumber }}</h3>
+            <h4>{{ item.subject?.name }}</h4>
+            <p class="item">
+              {{ item.season?.name }}
+            </p>
+            <p class="item">
+              {{ item.applicationType | enumItem: "applicationType" }}
+            </p>
+          </label>
+        } @empty {
+          <ped-empty [title]="t('empty.application_select.title')">
+            <div class="application-content">
+              {{ t("empty.application_select.description") }}
+            </div>
+          </ped-empty>
+        }
+      </div>
+    </nz-radio-group>
+  </ng-container>
+</ng-container>

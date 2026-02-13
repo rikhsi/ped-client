@@ -1,0 +1,83 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  OnInit,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
+import { ProfileApiService } from '@api/controllers';
+import { EkadrContractItem, EkadrType } from '@api/models/ekadr';
+import { BpService } from '@core/services';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { DocContractCardComponent } from '@pages/documents/components';
+import { BoxInfinite, TableComponent } from '@shared/components';
+import { SListService } from '@shared/services';
+import { TableClickType } from '@typings';
+
+@Component({
+  selector: 'ped-doc-contracts',
+  imports: [
+    TranslocoDirective,
+    TableComponent,
+    BoxInfinite,
+    DocContractCardComponent,
+  ],
+  templateUrl: './doc-contracts.component.html',
+  styleUrl: './doc-contracts.component.less',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [SListService],
+})
+export class DocContractsComponent implements OnInit {
+  readonly items = computed(() => this.slService.items());
+  readonly isLoading = computed(() => this.slService.isLoading());
+  readonly showTable = computed(() => this.bpService.isDesktop());
+
+  get columns() {
+    return this.route.snapshot.data['columns'];
+  }
+
+  get type(): EkadrType {
+    return this.route.snapshot.data['type'];
+  }
+
+  constructor(
+    private route: ActivatedRoute,
+    public slService: SListService<EkadrContractItem>,
+    private profileApi: ProfileApiService,
+    private destroyRef: DestroyRef,
+    private bpService: BpService,
+  ) {}
+
+  ngOnInit(): void {
+    this.slService
+      .init((pagination) => this.profileApi.getEkadrContracts$(pagination))
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+
+    this.slService.next(true);
+  }
+
+  onClick(item: TableClickType<EkadrContractItem>): void {
+    this.profileApi
+      .getEkadrRedirectUrl$(item.row.orderDocumentId, this.type)
+      .subscribe({
+        next: ({ result }) => {
+          const url = result.replace(/^"|"$/g, '');
+
+          window.open(url, '_self');
+        },
+      });
+  }
+  changePage(pageIndex: number): void {
+    const pageSize = this.slService.size();
+
+    this.slService.changePaginationBox({
+      pageIndex,
+      pageSize,
+      sort: [],
+      filter: [],
+    });
+  }
+}

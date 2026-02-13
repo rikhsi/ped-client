@@ -1,0 +1,23 @@
+<ng-container *transloco="let t">
+  <p class="title">{{ t("institution.info") }}</p>
+
+  <ped-application-institution-form
+    [regions]="regions()"
+    [districts]="districts()"
+    [eduDirections]="eduDirections()"
+    [institutions]="institutions()"
+    [formGroup]="institutionForm"
+    [isRegionLoading]="isRegionLoading()"
+    [isDistrictLoading]="isDistrictLoading()"
+    [isDirectionLoading]="isDirectionLoading()"
+    [isInstitutionLoading]="isInstitutionLoading()"
+  />
+
+  @if (showAlertEducation()) {
+    <nz-alert
+      nzType="error"
+      [nzMessage]="t('edu_direction.no_error.title')"
+      [nzDescription]="t('edu_direction.no_error.description')"
+    ></nz-alert>
+  }
+</ng-container>

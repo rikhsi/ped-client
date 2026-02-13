@@ -1,0 +1,112 @@
+@import 'colors';
+@import 'mixins';
+
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    background: @ped-grey-100;
+    min-height: calc(100svh - 100px);
+
+    .media(@media-sm, {
+        min-height: calc(100svh - 60px);
+    });
+
+    .header {
+        height: auto;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+
+        .media(@media-sm, {
+            padding: 10px 16px;
+        });
+
+    .box-container {
+        width: 100%;
+        max-width: 1880px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: @ped-white-100;
+        border-radius: 24px !important;
+        padding: 8px 22px;
+        margin: 0 auto;
+
+        .media(@media-sm, {
+            padding: 8px 12px;
+            border-radius: 12px;
+        });
+    }
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+
+    .media(@media-sm, {
+        padding-bottom: 12px;
+    });
+
+    .container {
+        display: flex;
+        flex: 1;
+        padding: 24px 0;
+
+        .media(@media-sm, {
+            padding: 10px 0;
+        });
+
+        .navigation {
+            position: sticky;
+            top: 20px;
+            left: 0;
+            min-width: 240px;
+            height: calc(100svh - 100px);
+            transition: 0.3s all;
+
+            &.hide {
+                width: 0;
+                min-width: 0px;
+                flex: 0;
+                opacity: 0;
+            }
+
+            .media(@media-sm, {
+                display: none;
+            });
+        }
+
+        .route {
+            flex: 1;
+            padding: 0 20px;
+
+            ::ng-deep router-outlet+* {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                flex: 1;
+                height: 100%;
+                min-height: 0;
+            }
+        }
+    }
+}
+
+.bottom-navigation {
+    display: none;
+
+    .media(@media-sm, {
+        display: block;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 999;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+        padding: 6px 0;
+        background: @ped-white-100;
+    });
+}
+}

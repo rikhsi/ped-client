@@ -1,0 +1,14 @@
+<ng-container *transloco="let t">
+  <div class="infos">
+    <h1 class="title">{{ name() }}</h1>
+    <p class="season">{{ seasonName() }}</p>
+  </div>
+
+  @if (steps()?.length > 1) {
+    <ped-stepper
+      [stepsLength]="steps()?.length"
+      [currentStepIndex]="currentStepIndex()"
+      class="stepper"
+    />
+  }
+</ng-container>

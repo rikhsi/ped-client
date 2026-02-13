@@ -1,0 +1,19 @@
+<div class="main-notification" *transloco="let t">
+  <div class="top">
+    <p class="text">{{ t("notification.title") }}</p>
+
+    @if (!!items()?.length) {
+      <button nz-button nzType="text" nzSize="small" class="note">
+        {{ t("notification.markAsRead") }}
+      </button>
+    }
+  </div>
+
+  <div [ngClass]="{ empty: !items()?.length }" class="list">
+    @for (item of items(); track $index) {
+    } @empty {
+      <ped-empty [title]="t('empty.notification')" [size]="'small'">
+      </ped-empty>
+    }
+  </div>
+</div>

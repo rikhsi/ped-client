@@ -1,0 +1,46 @@
+@import 'colors';
+@import 'mixins';
+
+:host {
+    display: flex;
+    flex: 1;
+    height: 100%;
+
+    .profile-menu {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0 12px;
+        border-radius: 16px;
+        flex: 1;
+
+        .media(@media-md, {
+            padding: 0 12px;
+        });
+
+        .media(@media-sm, {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            flex-direction: row;
+        });
+
+        .menu-items-top {
+            display: flex;
+            flex-direction: column;
+
+            .media(@media-sm, {
+                display: contents;
+            });
+        }
+
+        .logout {
+            position: fixed;
+            left: 14px;
+            bottom: 20px;
+
+            .media(@media-sm, {
+                display: none;
+            });
+        }
+    }
+}

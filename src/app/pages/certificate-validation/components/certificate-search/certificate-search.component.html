@@ -1,0 +1,47 @@
+<div class="search-card" *transloco="let t">
+  <h2 class="title">{{ t("certificateValidation.searchTitle") }}</h2>
+
+  <div class="search-form">
+    <div class="form-fields">
+      <div class="form-group">
+        <label class="label">{{ t("certificateValidation.series") }}</label>
+        <nz-select
+          [(ngModel)]="selectedSeries"
+          [nzPlaceHolder]="t('certificateValidation.selectSeries')"
+          class="select-input"
+        >
+          @for (series of certificateSeries(); track series.id) {
+            <nz-option
+              [nzValue]="series.id"
+              [nzLabel]="series.serialKey"
+            ></nz-option>
+          }
+        </nz-select>
+      </div>
+
+      <div class="form-group">
+        <label class="label">{{ t("certificateValidation.number") }}</label>
+        <input
+          nz-input
+          [(ngModel)]="certificateNumber"
+          [placeholder]="t('certificateValidation.numberPlaceholder')"
+          class="text-input"
+        />
+      </div>
+    </div>
+
+    <div class="button-wrapper">
+      <button
+        nz-button
+        nzType="primary"
+        class="search-button"
+        (click)="onSearch()"
+        [disabled]="!selectedSeries() || !certificateNumber()"
+        [nzLoading]="isLoading()"
+      >
+        <span nz-icon nzType="o:search" class="search-icon"></span>
+        {{ t("certificateValidation.search") }}
+      </button>
+    </div>
+  </div>
+</div>

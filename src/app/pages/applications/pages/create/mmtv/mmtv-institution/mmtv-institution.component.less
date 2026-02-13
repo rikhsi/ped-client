@@ -1,0 +1,18 @@
+@import 'colors';
+@import 'mixins';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+
+    .title {
+        .text(600,20px,110%);
+    }       
+
+    .control {
+        display: flex;
+        flex-direction: column;
+        row-gap: 6px;
+    }
+}

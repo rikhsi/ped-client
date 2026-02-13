@@ -1,0 +1,76 @@
+@import "colors";
+
+.ant-btn {
+  transition: 0.3s all;
+  border-radius: 8px;
+  width: auto;
+  height: auto;
+  padding: 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+
+  &-text {
+    &:active {
+      background: fade(@ped-black-200, 10%);
+    }
+  }
+
+  &-lg {
+    width: auto;
+    height: auto;
+    padding: 10px;
+    border-radius: 50px;
+  }
+
+  &-sm {
+    padding: 6px;
+    width: auto;
+    height: auto;
+  }
+
+  &-icon-only {
+    width: auto;
+    height: auto;
+    padding: auto;
+
+    &.ant-btn-lg {
+      border-radius: 50px;
+    }
+
+    &.ant-btn-sm {
+      border-radius: 8px;
+    }
+  }
+
+  &-primary {
+    background: @ped-blue-100;
+    border: @ped-blue-100;
+
+    [nz-icon] {
+      color: @ped-white-100;
+    }
+
+    &.grey {
+      color: @ped-black-100;
+      background: @ped-grey-300;
+    }
+  }
+
+  &.ripple {
+    box-shadow: none;
+
+    &:active {
+      background: fade(@ped-black-200, 10%);
+    }
+  }
+
+  &.border {
+    box-shadow: none;
+    border: none;
+  }
+
+  &.w-min {
+    min-width: 100px;
+  }
+}

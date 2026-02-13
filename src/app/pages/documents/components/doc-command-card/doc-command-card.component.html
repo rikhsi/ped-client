@@ -1,0 +1,29 @@
+<ng-container *transloco="let t">
+  <ped-collapsible-card [isOpen]="expanded()" (toggle)="toggleExpand()">
+    <div header>
+      <ped-item
+        [label]="t('document.institution')"
+        [value]="item()?.spInstitutionLabel"
+      />
+    </div>
+    <div class="content">
+      <ped-item [label]="t('document.type')" [value]="item()?.typeOrder" />
+      <ped-item [label]="t('document.range')" [value]="item()?.orderDate" />
+      <ped-item
+        [label]="t('document.status')"
+        [value]="item()?.documentStatusForUser"
+      />
+
+      <button
+        nz-button
+        nzType="primary"
+        class="ripple border"
+        (click)="clicked.emit()"
+      >
+        {{ t("open_ekadr_doc") }}
+
+        <span nz-icon nzType="o:arrowLeft" nzRotate="180"></span>
+      </button>
+    </div>
+  </ped-collapsible-card>
+</ng-container>

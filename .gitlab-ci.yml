@@ -1,0 +1,51 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+  PROJECT_NAME: PedagogClienFront
+
+.build_template: &build_template
+  stage: build
+  script:
+    - export IMAGE_TAG="pedagog_client_front:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
+    - docker build --no-cache --build-arg PROJECT_NAME=$PROJECT_NAME --build-arg ENVIRONMENT=$BUILD_ENV -t $IMAGE_TAG .
+
+build_test:
+  <<: *build_template
+  only:
+    - test
+  variables:
+    BUILD_ENV: build-testing
+
+build_prod:
+  <<: *build_template
+  only:
+    - main
+  variables:
+    BUILD_ENV: build-prod
+
+deploy_test:
+  stage: deploy
+  only:
+    - test
+  script:
+    - IMAGE_TAG="pedagog_client_front:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
+    - CONTAINER_NAME="pedagog-client-test"
+    - PORT=91
+    - docker stop $CONTAINER_NAME || true
+    - docker rm $CONTAINER_NAME || true
+    - docker run --restart unless-stopped -d --name $CONTAINER_NAME -p $PORT:80 $IMAGE_TAG
+
+deploy_prod:
+  stage: deploy
+  only:
+    - main
+  script:
+    - IMAGE_TAG="pedagog_client_front:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
+    - CONTAINER_NAME="pedagog-client-prod"
+    - PORT=98
+    - docker stop $CONTAINER_NAME || true
+    - docker rm $CONTAINER_NAME || true
+    - docker run --restart unless-stopped -d --name $CONTAINER_NAME -p $PORT:80 $IMAGE_TAG

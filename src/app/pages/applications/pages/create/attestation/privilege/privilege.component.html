@@ -1,0 +1,40 @@
+<ng-container *transloco="let t">
+  <p class="title">{{ t("privilege.info") }}</p>
+
+  <div [formGroup]="form" class="controls">
+    <div class="control">
+      <ped-item [label]="t('prop.privilege_type')" />
+      <ped-select-default
+        [placeholder]="t('prop.select')"
+        [isLoading]="isPrivilegesLoading()"
+        formControlName="fileType"
+      >
+        @for (
+          item of privileges() | privilegeAge | privilegeExperience;
+          track item.id
+        ) {
+          <nz-option [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+        }
+      </ped-select-default>
+    </div>
+
+    @if (
+      !selectedPrivelege()?.isFileRequired &&
+      !!form.controls.fileType.getRawValue() &&
+      selectedPrivelege()
+    ) {
+      <nz-alert
+        nzType="warning"
+        [nzMessage]="t('privilege.warning.title')"
+        [nzDescription]="t('privilege.warning.description')"
+      ></nz-alert>
+    }
+
+    <ped-application-drop-file
+      [title]="t('privilege.file')"
+      formControlName="file"
+    >
+      <p class="desc">{{ t("privilege.file.description") }}</p>
+    </ped-application-drop-file>
+  </div>
+</ng-container>

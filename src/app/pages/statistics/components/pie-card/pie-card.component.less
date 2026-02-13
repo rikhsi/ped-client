@@ -1,0 +1,88 @@
+@import "colors";
+
+:host {
+  height: 100%;
+  flex: 1;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  padding: 16px;
+  background: @ped-white-100;
+  height: 100%;
+
+  .upper {
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 12px;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    flex: 1;
+
+    .item {
+      display: flex;
+      column-gap: 8px;
+      align-items: center;
+      white-space: nowrap;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 6px;
+
+      [nz-icon] {
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: #d5f5ea;
+      }
+
+      .percent {
+        font-weight: 500;
+        font-size: 16px;
+        color: #475569;
+      }
+
+      .text {
+        flex: 1;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      .count {
+        font-weight: 700;
+        font-size: 16px;
+        color: #32b285;
+      }
+    }
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      row-gap: 20px;
+    }
+  }
+}
+
+:host {
+  .icon {
+    ::ng-deep svg {
+      fill: none;
+    }
+  }
+}

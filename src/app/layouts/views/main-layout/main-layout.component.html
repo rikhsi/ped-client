@@ -1,0 +1,25 @@
+<div class="main-layout">
+  <header class="header box-wrapper">
+    <ped-main-header
+      [notificationList]="notificationList()"
+      (langChange)="langChange($event)"
+      class="box-container"
+    ></ped-main-header>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <nav [ngClass]="{ hide: !showNavigation() }" class="navigation">
+        <ped-main-sidebar-menu [menuItems]="navigation" (logout)="logout()" />
+      </nav>
+
+      <div class="route">
+        <router-outlet />
+      </div>
+    </div>
+  </main>
+
+  <aside class="bottom-navigation">
+    <ped-main-sidebar-menu [menuItems]="bottomMenu" [isVertical]="true" />
+  </aside>
+</div>

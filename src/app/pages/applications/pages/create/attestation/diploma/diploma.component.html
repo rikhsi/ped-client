@@ -1,0 +1,21 @@
+<ng-container *transloco="let t">
+  <div class="infos">
+    <p class="title">{{ t("diploma.infos") }}</p>
+    <p class="description">{{ t("diploma.select") }}</p>
+  </div>
+
+  <ped-application-diploma-form
+    [diplomas]="diplomas()"
+    [formControl]="control"
+  />
+
+  @if (control.getRawValue()) {
+    <ped-application-drop-file
+      [formControl]="diplomaFile"
+      [title]="t('diploma.file')"
+      (removed)="removeDiplomaFile()"
+    >
+      <p class="desc">{{ t("diploma.file.description") }}</p>
+    </ped-application-drop-file>
+  }
+</ng-container>

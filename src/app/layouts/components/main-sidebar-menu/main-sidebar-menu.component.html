@@ -1,0 +1,26 @@
+<ng-container *transloco="let t">
+  <div class="profile-menu">
+    <div class="menu-items-top">
+      @for (item of menuItems(); track item.key) {
+        @if (item.key !== "prop.logout") {
+          <ped-menu-item
+            [label]="t(item.key) ?? ''"
+            [link]="item.link"
+            [prefixIcon]="item.prefixIcon"
+            [vertical]="isVertical()"
+            [danger]="item.danger"
+          />
+        }
+      }
+    </div>
+
+    <div class="logout">
+      <ped-menu-item
+        [label]="t('prop.logout')"
+        [prefixIcon]="'o:logout'"
+        [danger]="true"
+        (clicked)="logout.emit()"
+      />
+    </div>
+  </div>
+</ng-container>

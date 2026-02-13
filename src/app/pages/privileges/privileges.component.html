@@ -1,0 +1,63 @@
+<ng-container *transloco="let t">
+  <div class="box-wrapper">
+    <div class="top">
+      <h1 class="title">{{ t("modules.privileges.title") }}</h1>
+
+      <button
+        nz-button
+        nzType="primary"
+        class="refresh"
+        (click)="onRefresh()"
+        [nzLoading]="isLoading()"
+      >
+        <span nz-icon nzType="o:refresh"></span>
+        {{ t("action.refresh") }}
+      </button>
+    </div>
+
+    <div class="content">
+      <ped-box-infinite
+        [showContent]="!isEmpty()"
+        [isLoading]="isLoading()"
+        [customLayout]="true"
+        [emptyTitle]="'empty.privileges'"
+      >
+        @for (cert of nationalItems(); track cert.id) {
+          <ped-national-certificate-card
+            [documentNumber]="cert.documentNumber"
+            [documentSeries]="cert.documentSeries"
+            [subject]="cert.subject?.name"
+            [givenOrganization]="cert.givenOrganization"
+            [certificateTypeLevelName]="cert.certificateTypeLevelName"
+            [startDate]="cert.startDate"
+            [endDate]="cert.endDate"
+            [isVerified]="cert.isVerified"
+          />
+        }
+        @for (cert of dtmItems(); track cert.id) {
+          <ped-stc-certificate-card
+            [number]="cert.number"
+            [level]="cert.level"
+            [subject]="cert.subject?.name"
+            [ball]="cert.ball"
+            [startDate]="cert.startDate"
+            [endDate]="cert.endDate"
+          />
+        }
+        @if (ustamaItems()?.length) {
+          <h1 class="section-title">{{ t("modules.privileges.ustamalar") }}</h1>
+        }
+        @for (achievement of ustamaItems(); track achievement.id) {
+          <ped-ustama-achievement-card
+            [seasonName]="achievement.seasonName"
+            [subjectName]="achievement.subjectName"
+            [category]="achievement.category"
+            [givenDate]="achievement.givenDate"
+            [validDate]="achievement.validDate"
+            [downloadApi]="ssaService.getSalarySupplementFile$(achievement.id)"
+          />
+        }
+      </ped-box-infinite>
+    </div>
+  </div>
+</ng-container>

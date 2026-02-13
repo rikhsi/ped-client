@@ -1,0 +1,68 @@
+<div class="workplace-page" *transloco="let t">
+  <div class="page-header">
+    <h1>{{ t("workplace.title") }}</h1>
+  </div>
+  <div class="page-content">
+    <div class="desktop-table">
+      <ped-table
+        [columns]="columns"
+        [data]="items()"
+        [isLoading]="isLoading()"
+        [showPagination]="false"
+        [emptyText]="t('workplace.emptyText')"
+      />
+    </div>
+
+    <div class="mobile-cards">
+      <ped-box-infinite
+        [showContent]="!!items().length"
+        [isLoading]="isLoading()"
+        [emptyTitle]="'empty.workplace'"
+      >
+        @for (item of items(); track $index) {
+          <ped-collapsible-card
+            [isOpen]="expandedIndex() === $index"
+            (toggle)="toggleExpand($index)"
+          >
+            <div header>
+              <ped-item
+                [label]="t('workplace.column.tin')"
+                [value]="item.tin"
+              />
+              <ped-item
+                [label]="t('workplace.column.institutionName')"
+                [value]="item.institutionName"
+              />
+            </div>
+
+            <ped-item
+              [label]="t('workplace.column.startDate')"
+              [value]="item.startDate"
+              priority="values"
+            />
+            <ped-item
+              [label]="t('workplace.column.departmentName')"
+              [value]="item.departmentName"
+              priority="values"
+            />
+            <ped-item
+              [label]="t('workplace.column.contractEndDate')"
+              [value]="item.contractEndDate"
+              priority="values"
+            />
+            <ped-item
+              [label]="t('workplace.column.contractNumber')"
+              [value]="item.contractNumber"
+              priority="values"
+            />
+            <ped-item
+              [label]="t('workplace.column.address')"
+              [value]="item.address"
+              priority="values"
+            />
+          </ped-collapsible-card>
+        }
+      </ped-box-infinite>
+    </div>
+  </div>
+</div>

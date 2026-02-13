@@ -1,0 +1,11 @@
+<div class="modal-content-wrapper">
+  @if (config(); as data) {
+    <div class="modal-header">
+      <h3 class="modal-title">{{ data.title }}</h3>
+    </div>
+    <div class="modal-body" [innerHTML]="data.content"></div>
+    <div class="modal-footer">
+      <button nz-button nzType="primary" (click)="close()">Yopish</button>
+    </div>
+  }
+</div>

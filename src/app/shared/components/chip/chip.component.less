@@ -1,0 +1,31 @@
+@import 'colors';
+@import 'mixins';
+
+:host {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    padding: 4.5px 8px;
+    border-radius: 40px;
+    background: @ped-grey-100;
+    color: @ped-black-100;
+    width: fit-content;
+
+    .text(400,14px,100%);
+    
+
+    .dot {
+        font-size: 8px;
+        margin-right: 4px;
+        color: @ped-red-100;
+    }
+
+    .content {
+        max-width: 150px;
+        white-space: pre-wrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block; 
+        font-size: 12px;
+    }
+}

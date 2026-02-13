@@ -1,0 +1,38 @@
+<ng-container *transloco="let t">
+  <div class="box-wrapper">
+    <div class="top">
+      <h1 class="title">{{ t("modules.toy.title") }}</h1>
+
+      <div class="right">
+        <p class="mwp">
+          {{ t("prop.main_work_place") }}:
+          <span class="name">Chilonzor tumani</span>
+        </p>
+
+        <button
+          nz-button
+          nzType="primary"
+          class="refresh"
+          (click)="refresh$.next()"
+          [nzLoading]="isLoading()"
+        >
+          <span nz-icon nzType="o:refresh"></span>
+          {{ t("action.refresh") }}
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+      <ped-box-infinite
+        [showContent]="!!items()?.length"
+        [isLoading]="isLoading()"
+        [customLayout]="true"
+        [emptyTitle]="'empty.toy'"
+      >
+        @for (item of items(); track item.id) {
+          <ped-toy-card (pointingClick)="onPointing()" />
+        }
+      </ped-box-infinite>
+    </div>
+  </div>
+</ng-container>

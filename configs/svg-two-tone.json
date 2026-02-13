@@ -1,0 +1,26 @@
+{
+  "srcFiles": ["./public/icons/two-tone/*.svg"],
+  "outputDirectory": "./src/app/constants",
+  "fileName": "svg-two-tone",
+  "objectName": "SVG_TWO_TONE_ICONS",
+  "svgoConfig": {
+    "plugins": [
+      "cleanupAttrs",
+      {
+        "name": "removeAttrs",
+        "params": {
+          "attrs": "(width|height)"
+        }
+      },
+      {
+        "name": "addAttributesToSVGElement",
+        "params": {
+          "attributes": [{ "class": "svg-two-tone" }]
+        }
+      }
+    ]
+  },
+  "generateType": false,
+  "generateTypeObject": false,
+  "compileSources": false
+}

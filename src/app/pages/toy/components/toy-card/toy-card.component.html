@@ -1,0 +1,58 @@
+<ng-container *transloco="let t">
+  <div class="toy-card">
+    <div class="toy-icon">
+      <img src="images/course.png" alt="course" />
+    </div>
+
+    <div class="box">
+      <p class="step">{{ stepCount() }} - {{ t("prop.step") }}</p>
+
+      <div class="toy-content">
+        <div class="info-row">
+          <p class="label">{{ t("prop.candidate_name") }}:</p>
+          <p class="value">{{ "testvalue" }}</p>
+        </div>
+
+        <div class="info-row">
+          <p class="label">{{ t("prop.region") }}:</p>
+          <p class="value">{{ "testvalue" }}</p>
+        </div>
+
+        <div class="info-row">
+          <p class="label">{{ t("prop.district") }}:</p>
+          <p class="value">
+            {{ "testvalue" }}
+          </p>
+        </div>
+
+        <div class="info-row">
+          <p class="label">{{ t("prop.institution") }}:</p>
+          <p class="value">{{ "testvalue" }}</p>
+        </div>
+
+        <div class="info-row">
+          <p class="label">{{ t("prop.subject") }}:</p>
+          <p class="value">{{ "testvalue" }}</p>
+        </div>
+
+        <div class="info-row">
+          <p class="label">{{ t("prop.video_theme") }}:</p>
+          <p class="value">
+            {{ "testvalue" }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button
+      nz-button
+      nzType="primary"
+      nzSize="large"
+      class="pointing"
+      (click)="pointingClick.emit()"
+    >
+      <nz-icon nzType="o:icon" />
+      {{ t("action.pointing") }}
+    </button>
+  </div>
+</ng-container>

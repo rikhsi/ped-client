@@ -1,0 +1,15 @@
+<div class="item">
+  <p
+    class="label"
+    [ngClass]="{ danger: danger(), primary: type() === 'primary' }"
+  >
+    {{ label() }}:
+  </p>
+  <p class="value">
+    @if (template(); as template) {
+      <ng-container [ngTemplateOutlet]="template"></ng-container>
+    } @else {
+      {{ value() }}
+    }
+  </p>
+</div>

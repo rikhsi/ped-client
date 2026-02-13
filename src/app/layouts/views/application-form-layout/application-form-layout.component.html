@@ -1,0 +1,20 @@
+<div class="acl">
+  <div class="box">
+    <ped-afl-navigation
+      [name]="season()?.applicationType | enumItem: 'applicationType'"
+      [seasonName]="season()?.name"
+      [currentStepIndex]="currentStepIndex()"
+      [steps]="steps()"
+    />
+
+    @if (routeListenerReady()) {
+      <ped-afl-content
+        [buttons]="buttons()"
+        (onBack)="onBack()"
+        (onCancel)="onCancel()"
+        (onNext)="onNext()"
+        (onSend)="onSend()"
+      />
+    }
+  </div>
+</div>

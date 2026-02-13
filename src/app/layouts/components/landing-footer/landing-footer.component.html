@@ -1,0 +1,146 @@
+<ng-container *transloco="let t">
+  <div class="footer-wrapper">
+    <div class="top-section">
+      <div class="top">
+        <div class="col brand-col">
+          <div class="logos">
+            <a href="https://www.uzedu.uz/" target="_blank">
+              <img src="./images/mmtv-small.svg" alt="mmtv" class="mmtv-logo" />
+            </a>
+            <img
+              src="./images/pedagog.svg"
+              alt="PedagogLogo"
+              class="pedagog-logo"
+            />
+          </div>
+
+          <p class="description">{{ t("description") }}</p>
+        </div>
+
+        <div class="col">
+          <h3>{{ t("menu") }}</h3>
+          <ul>
+            <li
+              (click)="
+                openMenuModal(
+                  t('attestation.modal.title'),
+                  getAttestationContent()
+                )
+              "
+            >
+              {{ t("attestationTest") }}
+            </li>
+            <li
+              (click)="
+                openMenuModal(
+                  t('modal.ministersFund.title'),
+                  getMinistersFundContent()
+                )
+              "
+            >
+              {{ t("ministersFund") }}
+            </li>
+            <li
+              (click)="
+                openMenuModal(
+                  t('modal.professionalCertificate.title'),
+                  getProfessionalCertificateContent()
+                )
+              "
+            >
+              {{ t("professionalCertificate") }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col">
+          <h3>{{ t("programs") }}</h3>
+          <ul>
+            <li>
+              <a routerLink="check-certificate">{{ t("check_cert") }}</a>
+            </li>
+
+            <li>
+              <a
+                href="files/olis.xlsx"
+                [download]="t('lowEducationSchools') + '.xlsx'"
+              >
+                {{ t("lowEducationSchools") }}
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="files/saralash.pdf"
+                [download]="t('lowEducationSchools_second') + '.pdf'"
+              >
+                {{ t("lowEducationSchools_second") }}
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="https://t.me/pedagoginfo_bot"
+                target="_blank"
+                rel="noopener noreferrer"
+                >{{ t("telegramBot") }}</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="col">
+          <h3 class="contact-title">{{ t("contact") }}</h3>
+          <ul>
+            <li>
+              <a href="tel:+998999999999">(71) 202-09-09</a>
+            </li>
+            <li>
+              <a href="mailto:pedkadr@gmail.com">info&#64;uzedu.uz</a>
+            </li>
+            <li>{{ t("tashkentAddress") }}</li>
+          </ul>
+
+          <div class="social-icons">
+            <a href="https://t.me/uzedu" target="_blank" aria-label="Telegram">
+              <span nz-icon nzType="f:telegram" class="icon"></span>
+            </a>
+            <a
+              href="https://www.instagram.com/mmtv_uz/"
+              target="_blank"
+              aria-label="Instagram"
+            >
+              <span nz-icon nzType="f:instagram" class="icon"></span>
+            </a>
+            <a
+              href="https://www.facebook.com/uzedu1/"
+              target="_blank"
+              aria-label="Facebook"
+            >
+              <span nz-icon nzType="f:facebook" class="icon"></span>
+            </a>
+            <a
+              href="https://youtube.com/@UzEdu1"
+              target="_blank"
+              aria-label="YouTube"
+            >
+              <span nz-icon nzType="f:youtube" class="icon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="bottom">
+      <p class="copyright">© 2025 {{ t("footerTitle") }}</p>
+      <a href="https://uzinfocom.uz/uz" target="_blank">
+        <div class="developed-by">
+          <p>{{ t("developedBy") }}</p>
+          <img src="./images/uzinfocom.svg" alt="Uzinfocom" />
+        </div>
+      </a>
+    </div>
+  </div>
+</ng-container>

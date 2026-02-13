@@ -1,0 +1,27 @@
+<ng-container *transloco="let t">
+  <p class="title">{{ t("institution.info") }}</p>
+
+  <ped-application-institution-form
+    [regions]="regions()"
+    [districts]="districts()"
+    [eduDirections]="eduDirections()"
+    [institutions]="institutions()"
+    [formGroup]="institutionForm"
+    [isRegionLoading]="isRegionLoading()"
+    [isDistrictLoading]="isDistrictLoading()"
+    [isDirectionLoading]="isDirectionLoading()"
+    [isInstitutionLoading]="isInstitutionLoading()"
+  />
+
+  <div class="control">
+    <ped-item [label]="t('prop.subject')" />
+    <ped-select-default
+      [placeholder]="t('prop.select')"
+      [formControl]="institutionForm.controls.subjectId"
+    >
+      @for (item of subjects(); track item.id) {
+        <nz-option [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+      }
+    </ped-select-default>
+  </div>
+</ng-container>

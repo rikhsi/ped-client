@@ -1,0 +1,14 @@
+nz-select .ant-select-selection-item,
+nz-select-item {
+  display: -webkit-box;         /* для WebKit браузеров */
+  -webkit-box-orient: horizontal; /* горизонтальная ориентация */
+  -webkit-line-clamp: 1;        /* обрезаем до 1 строки */
+  overflow: hidden;             /* скрываем лишний текст */
+  text-overflow: ellipsis;      /* добавляем ... */
+  white-space: normal;           /* отменяем nowrap, чтобы line-clamp работал */
+  line-height: 100% !important;
+}
+
+.ant-select-item-option-content {
+    white-space: wrap;
+}

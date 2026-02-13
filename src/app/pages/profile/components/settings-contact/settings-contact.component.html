@@ -1,0 +1,61 @@
+<ng-container *transloco="let t">
+  <div class="settings-contact">
+    <div class="modal-header">
+      <h3>{{ t("profile.edit") }}</h3>
+    </div>
+
+    <ng-template #phoneTemplate>
+      <div class="control">
+        <p>{{ profile().phoneNumber }}</p>
+
+        <button nz-button class="border ripple" (click)="onEditPhone()">
+          <span nz-icon nzType="f:pencil"></span>
+        </button>
+      </div>
+    </ng-template>
+
+    <ped-item [label]="t('prop.phone')" [template]="phoneTemplate"> </ped-item>
+
+    <ng-template #emailTemplate>
+      <div class="control">
+        <p>{{ profile().email }}</p>
+
+        <button nz-button class="border ripple" (click)="onEditEmail()">
+          <span nz-icon nzType="f:pencil"></span>
+        </button>
+      </div>
+    </ng-template>
+
+    <ped-item [label]="t('prop.email')" [template]="emailTemplate"> </ped-item>
+
+    <ng-template #telegramTemplate>
+      <div class="control">
+        @if (!editingTelegram()) {
+          <p>{{ profile().telegramUserName }}</p>
+
+          <button nz-button class="border ripple" (click)="onEditTelegram()">
+            <span nz-icon nzType="f:pencil"></span>
+          </button>
+        } @else {
+          <div class="edit-inline">
+            <ped-input-default
+              [(value)]="telegramValue"
+              placeholder="@username"
+            />
+            <div class="edit-buttons">
+              <button nz-button class="primary" (click)="onSaveTelegram()">
+                <span nz-icon nzType="f:check"></span>
+              </button>
+              <button nz-button class="border" (click)="onCancelTelegram()">
+                <span nz-icon nzType="o:x"></span>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </ng-template>
+
+    <ped-item [label]="t('prop.telegram')" [template]="telegramTemplate">
+    </ped-item>
+  </div>
+</ng-container>

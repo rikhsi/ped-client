@@ -1,0 +1,29 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { UserFullName } from '@typings';
+import { NzButtonComponent } from 'ng-zorro-antd/button';
+import { NzIconDirective } from 'ng-zorro-antd/icon';
+
+@Component({
+  selector: 'ped-toy-card',
+  imports: [TranslocoDirective, NzButtonComponent, NzIconDirective],
+  templateUrl: './toy-card.component.html',
+  styleUrl: './toy-card.component.less',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ToyCardComponent {
+  fullName = input<UserFullName>();
+  regionName = input<string>();
+  districtName = input<string>();
+  institutionName = input<string>();
+  subjectName = input<string>();
+  theme = input<string>();
+  stepCount = input<number>(2);
+
+  pointingClick = output<void>();
+}

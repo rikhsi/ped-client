@@ -1,0 +1,60 @@
+@import 'colors';
+@import 'mixins';
+
+.main-notification {
+    width: 350px;
+    background: @ped-white-100;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(30, 30, 30, 0.15);
+
+    .top {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        justify-content: space-between;
+        padding: 16px;
+        padding-right: 9px;
+        border-bottom: 1px solid @ped-grey-200;
+
+        .text {
+            .text(600,16px,100%);
+        }
+
+        .note {
+            .text(500,12px,100%);
+            color: @ped-grey-400;
+        }
+    }
+
+    .list {
+        display: flex;
+        flex-direction: column;
+        height: 350px;
+
+        &.empty {
+            height: 200px;
+        }
+    }
+
+    .empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: 24px;
+        height: 100%;
+
+        img {
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        p {
+           max-width: 90%; 
+           color: @ped-grey-400;
+           .text(500,13px, 100%);
+           text-align: center;
+        }
+    }
+}

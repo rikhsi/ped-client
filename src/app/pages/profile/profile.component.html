@@ -1,0 +1,85 @@
+<section class="profile" *transloco="let t">
+  <div class="profile-header">
+    <h5 class="title">{{ t("profile.title") }}</h5>
+    <div class="actions">
+      <button nz-button nzType="default" class="btn-edit" (click)="onEdit()">
+        <span nz-icon nzType="o:edit" style="color: gray"></span>
+        <span class="text"> {{ t("action.edit") }}</span>
+      </button>
+
+      <button
+        nz-button
+        nzType="primary"
+        class="btn-update"
+        (click)="onUpdate()"
+        [nzLoading]="isUpdating()"
+      >
+        <span nz-icon nzType="o:refresh" style="color: white"></span>
+        <span class="text">{{ t("action.refresh") }}</span>
+      </button>
+    </div>
+  </div>
+
+  @if (profileData(); as profile) {
+    <div class="mobile-profile-toggle">
+      <ped-info-self [profile]="profile" />
+
+      <ped-menu-item
+        [label]="t('show_extra_info')"
+        [suffixIcon]="'o:right'"
+        [prefixIcon]="'user'"
+        [suffixRotate]="showProfileInfo() ? 270 : 90"
+        [class]="showProfileInfo() ? 'expanded' : ''"
+        (clicked)="toggleProfileInfo()"
+        class="menu-item"
+      />
+    </div>
+
+    <div [@collapse]="showProfileInfo()">
+      <div class="profile-content">
+        <ped-info-main
+          [pinfl]="profile?.pinpp"
+          [passport]="profile?.passport"
+          [birthDate]="profile?.birthDate"
+          [gender]="profile?.gender"
+          [pedagogueExperience]="experiences()?.pedagogueExperiences"
+          [workExperience]="experiences()?.totalWorkExperiences"
+        />
+
+        @if (certificates(); as certificates) {
+          <ped-info-certificates [items]="certificates" />
+        }
+      </div>
+    </div>
+
+    <div class="profile-content-desktop">
+      <ped-info-self [profile]="profile" />
+
+      <ped-info-main
+        [pinfl]="profile?.pinpp"
+        [passport]="profile?.passport"
+        [birthDate]="profile?.birthDate"
+        [gender]="profile?.gender"
+        [pedagogueExperience]="experiences()?.pedagogueExperiences"
+        [workExperience]="experiences()?.totalWorkExperiences"
+      />
+
+      @if (certificates()?.length) {
+        <ped-info-certificates [items]="certificates()" />
+      }
+    </div>
+
+    <div class="mobile-menu-items">
+      @for (item of mobileMenuItems; track item.key) {
+        <ped-menu-item
+          [label]="t(item.key) ?? ''"
+          [link]="item.link"
+          [prefixIcon]="item.prefixIcon"
+          [danger]="item.danger"
+          (clicked)="onMobileMenuClick(item)"
+          class="menu-item"
+        />
+      }
+    </div>
+  }
+</section>

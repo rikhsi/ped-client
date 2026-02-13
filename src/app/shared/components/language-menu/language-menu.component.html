@@ -1,0 +1,41 @@
+<button
+  nz-button
+  nz-dropdown
+  nzTrigger="click"
+  [nzDropdownMenu]="menu"
+  nzPlacement="bottomRight"
+  class="border language-btn"
+>
+  <img
+    [ngSrc]="activeLang | flagPath"
+    width="24"
+    height="24"
+    [alt]="activeLang"
+    priority
+    decoding="async"
+    [pedSkeleton]="true"
+  />
+</button>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="lang-list">
+    @for (language of availableLangs; track $index) {
+      <div
+        class="dropdown-item"
+        [ngClass]="{ active: activeLang === language }"
+        (click)="languageChange.emit(language)"
+      >
+        <img
+          [ngSrc]="language | flagPath"
+          width="24"
+          height="24"
+          [alt]="activeLang"
+          priority
+          decoding="async"
+          [pedSkeleton]="true"
+        />
+        <span>{{ language }}</span>
+      </div>
+    }
+  </div>
+</nz-dropdown-menu>

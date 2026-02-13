@@ -1,0 +1,263 @@
+<ng-container *transloco="let t">
+  <p class="title">{{ t("application.check") }}</p>
+
+  <div class="list">
+    <div class="box">
+      <p class="subtitle">{{ t("application.check.self") }}</p>
+
+      @if (user(); as user) {
+        <div class="card">
+          <div class="item">
+            <p class="label">{{ t("prop.fullname") }}</p>
+            <p class="value">{{ user | fullname }}</p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.pinfl") }}</p>
+            <p class="value">{{ user?.pinpp }}</p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.passport") }}</p>
+            <p class="value">
+              {{ user?.passport?.serial }}{{ user?.passport?.number }}
+            </p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.birthdate") }}</p>
+            <p class="value">{{ user?.birthDate | date: "dd.MM.yyyy" }}</p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.gender") }}</p>
+            <p class="value">{{ user?.gender | gender }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    @if (diploma(); as diploma) {
+      <div class="box">
+        <p class="subtitle">{{ t("application.check.diploma") }}</p>
+
+        <div class="card">
+          <div class="item">
+            <p class="label">{{ t("prop.edu_shape") }}</p>
+            <p class="value">
+              {{ diploma?.educationLevel | enumItem: "educationLevel" }}
+            </p>
+          </div>
+          <div class="item">
+            <p class="label">{{ t("prop.diploma_number") }}</p>
+            <p class="value">
+              {{ diploma?.diplomaSerial }}{{ diploma?.diplomaNumber }}
+            </p>
+          </div>
+          <div class="item">
+            <p class="label">{{ t("prop.institution") }}</p>
+            <p class="value">
+              {{ diploma?.institutionName }}
+            </p>
+          </div>
+          <div class="item">
+            <p class="label">{{ t("prop.specialty") }}</p>
+            <p class="value">
+              {{ diploma?.specialityName }}
+            </p>
+          </div>
+          <div class="item">
+            <p class="label">{{ t("prop.given_date") }}</p>
+            <p class="value">
+              {{ diploma?.givenDate | date: "dd.MM.yyyy" }}
+            </p>
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (institution(); as institution) {
+      <div class="box">
+        <p class="subtitle">{{ t("application.check.institution") }}</p>
+
+        <div class="card">
+          <div class="item">
+            <p class="label">{{ t("prop.region") }}</p>
+            <p class="value">
+              {{ institution?.district?.region?.name }}
+            </p>
+          </div>
+          <div class="item">
+            <p class="label">{{ t("prop.district") }}</p>
+            <p class="value">
+              {{ institution?.district?.name }}
+            </p>
+          </div>
+          <div class="item">
+            <p class="label">{{ t("prop.edu_direction") }}</p>
+            <p class="value">
+              {{
+                attestationHelperForm.getRawValue().eduDirection
+                  | enumItem: "eduDirection"
+              }}
+            </p>
+          </div>
+          <div class="item">
+            <p class="label">{{ t("prop.institution") }}</p>
+            <p class="value">
+              {{ institution?.name }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      @if (applicationForm.getRawValue(); as application) {
+        @if (attestationHelperForm.getRawValue(); as helper) {
+          <div class="box">
+            <p class="subtitle">{{ t("application.check.attestation") }}</p>
+
+            <div class="card last">
+              @if (subject(); as subject) {
+                <div class="item">
+                  <p class="label">{{ t("prop.subject") }}</p>
+                  <p class="value">
+                    {{ subject?.name }}
+                  </p>
+                </div>
+              }
+
+              <div class="item">
+                <p class="label">{{ t("prop.language") }}</p>
+                <p class="value">
+                  {{ application.language | enumItem: "language" }}
+                </p>
+              </div>
+
+              <div class="item">
+                <p class="label">{{ t("prop.current_category") }}</p>
+                <p class="value">
+                  {{ application.category | enumItem: "pedCategory" }}
+                </p>
+              </div>
+              <!-- <div class="item">
+                <p class="label">{{ t("prop.next_category") }}</p>
+                <p class="value">
+                  {{
+                    application.category
+                      | nextCategory: diploma()
+                      | enumItem: "pedCategory"
+                  }}
+                </p>
+              </div> -->
+              <div class="item">
+                <p class="label">{{ t("prop.attestation_type") }}</p>
+                <p class="value">
+                  {{
+                    application.attestationData.attestationType
+                      | enumItem: "attestationType"
+                  }}
+                </p>
+              </div>
+              <div class="item">
+                <p class="label">{{ t("prop.season") }}</p>
+                <p class="value">
+                  {{ season()?.name }}
+                </p>
+              </div>
+
+              @if (certificate(); as certificate) {
+                <div class="item">
+                  <p class="label">{{ t("prop.certificate_serial") }}</p>
+                  <p class="value">
+                    {{ certificate?.serial?.serialKey }}
+                  </p>
+                </div>
+                <div class="item">
+                  <p class="label">{{ t("prop.certificate_number") }}</p>
+                  <p class="value">
+                    {{ certificate?.number }}
+                  </p>
+                </div>
+                <div class="item">
+                  <p class="label">{{ t("prop.certificate_given_date") }}</p>
+                  <p class="value">
+                    {{ certificate?.givenDate | date: "dd.MM.yyyy" }}
+                  </p>
+                </div>
+                <div class="item">
+                  <p class="label">{{ t("prop.certificate_expire_date") }}</p>
+                  <p class="value">
+                    {{ certificate?.expireDate | date: "dd.MM.yyyy" }}
+                  </p>
+                </div>
+              }
+
+              @if (privilege(); as privilege) {
+                <div class="item">
+                  <p class="label">{{ t("prop.privilege") }}</p>
+                  <p class="value">
+                    {{ privilege?.name }}
+                  </p>
+                </div>
+
+                <div class="item">
+                  <p class="label">{{ t("prop.privilege_file") }}</p>
+                  <ped-item-file
+                    [url]="helper.privilegeFile | fileToUrl"
+                    [type]="helper.privilegeFile | fileType"
+                    [name]="helper.privilegeFile | fileName"
+                    [mayOpen]="true"
+                  />
+                </div>
+              }
+
+              @if (helper.diplomaFile) {
+                <div class="item">
+                  <p class="label">{{ t("prop.diploma_file") }}</p>
+                  <ped-item-file
+                    [url]="helper.diplomaFile | fileToUrl"
+                    [type]="helper.diplomaFile | fileType"
+                    [name]="helper.diplomaFile | fileName"
+                    [mayOpen]="true"
+                  />
+                </div>
+              }
+
+              @if (helper.additionalFile) {
+                <div class="item">
+                  <p class="label">{{ t("prop.additional_file") }}</p>
+                  <ped-item-file
+                    [url]="helper.additionalFile | fileToUrl"
+                    [type]="helper.additionalFile | fileType"
+                    [name]="helper.additionalFile | fileName"
+                    [mayOpen]="true"
+                  />
+                </div>
+              }
+
+              @if (dtmCertificate(); as dtmCertificate) {
+                <div class="item">
+                  <p class="label">{{ t("prop.dtm_certificate.name") }}</p>
+                  <p class="value">
+                    {{ dtmCertificate?.level }}
+                  </p>
+                </div>
+              }
+
+              @if (nationalCertificate(); as nationalCertificate) {
+                <div class="item">
+                  <p class="label">
+                    {{ t("prop.national_certificate.name") }}
+                  </p>
+                  <p class="value">
+                    {{ nationalCertificate?.eduStudyCertificateTypeName }}
+                  </p>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      }
+    }
+  </div>
+</ng-container>

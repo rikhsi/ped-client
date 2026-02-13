@@ -1,0 +1,25 @@
+<ng-container *transloco="let t">
+  <h1>{{ t("document.title") }}</h1>
+
+  <ped-tabs
+    [tabs]="tabs"
+    [activeTab]="activeTab()"
+    (tabChange)="onTabChange($event)"
+  >
+  </ped-tabs>
+
+  <ped-select-default
+    [ngModel]="activeTab()"
+    (ngModelChange)="onSelectChange($event)"
+    [label]="t('select.document_tab')"
+    class="select"
+  >
+    @for (tab of tabs; track tab.value) {
+      <nz-option [nzLabel]="t(tab.key)" [nzValue]="tab.value"></nz-option>
+    }
+  </ped-select-default>
+
+  <div class="page-content">
+    <router-outlet />
+  </div>
+</ng-container>

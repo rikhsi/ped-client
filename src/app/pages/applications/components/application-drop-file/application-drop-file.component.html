@@ -1,0 +1,48 @@
+<ng-container *transloco="let t">
+  <div
+    pedFileInput
+    [(value)]="value"
+    (fileChange)="modelChange($event)"
+    accept=".zip,.pdf"
+    [multiple]="false"
+    [enableDrop]="true"
+    [blocked]="!!value()"
+    class="adf"
+  >
+    @if (!value()) {
+      <span nz-icon nzType="f:file" class="file-icon"></span>
+
+      @if (title(); as title) {
+        <p class="title">{{ title }}</p>
+      }
+
+      <div class="content">
+        <ng-content />
+      </div>
+    } @else {
+      <div class="file">
+        <div class="card">
+          <p class="item">
+            <span class="grey">{{ t("file.name") }}: </span>
+            <span>{{ value()?.name }}</span>
+          </p>
+          <p class="item">
+            <span class="grey">{{ t("file.size") }}: </span>
+            <span>{{ value()?.size | size }}</span>
+          </p>
+        </div>
+
+        <button
+          nz-button
+          nzType="primary"
+          nzDanger
+          (click)="removeFile($event)"
+        >
+          {{ t("file.remove") }}
+
+          <span nz-icon nzType="delete"></span>
+        </button>
+      </div>
+    }
+  </div>
+</ng-container>

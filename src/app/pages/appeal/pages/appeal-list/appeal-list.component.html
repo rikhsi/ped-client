@@ -1,0 +1,43 @@
+<div class="appeal-page" *transloco="let t">
+  <div class="page-header">
+    <h1>{{ t("appeal.title") }}</h1>
+
+    <!-- <button nz-button nzType="primary" routerLink="../form" class="create-btn">
+      <span nz-icon nzType="o:plus" class="icon"></span>
+      {{ t("appeal.createButton") }}
+    </button> -->
+  </div>
+
+  <div class="page-content">
+    <!-- Desktop: Table view -->
+    <div class="desktop-table">
+      <ped-table
+        [columns]="columns"
+        [data]="items()"
+        [isLoading]="isLoading()"
+        [total]="total()"
+        [pageIndex]="pageIndex()"
+        [pageSize]="pageSize()"
+        [showPagination]="true"
+        [isFrontPagination]="false"
+        (pageIndexChange)="onPageChange($event)"
+        [emptyText]="t('appeal.emptyText')"
+        (onRenderClick)="onNavigate($event)"
+      />
+    </div>
+
+    <!-- Mobile: Cards view -->
+    <div class="mobile-cards">
+      <ped-box-infinite
+        [showContent]="!!items().length"
+        [isLoading]="isLoading()"
+        [emptyTitle]="'empty.appeal'"
+        (onScroll)="onScroll()"
+      >
+        @for (appeal of items(); track appeal.id) {
+          <ped-appeal-card [appeal]="appeal" />
+        }
+      </ped-box-infinite>
+    </div>
+  </div>
+</div>

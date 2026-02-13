@@ -1,0 +1,83 @@
+@import "colors";
+
+:host {
+  height: 100%;
+  flex: 1;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+
+  @media (max-width: 500px) {
+    padding: 16px;
+  }
+}
+
+.bar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bar-item {
+  display: grid;
+  background-color: @ped-white-100;
+  padding: 6px;
+  border-radius: 12px;
+  grid-template-columns: 30px 150px 1fr;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 25px 120px 1fr;
+    gap: 8px;
+    font-size: 13px;
+  }
+}
+
+.bar-number {
+  color: #666;
+  text-align: right;
+}
+
+.bar-label {
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar-container {
+  position: relative;
+  height: 32px;
+  background: #F7F8F8;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bar {
+  position: relative;
+  height: 100%;
+  background: #56C3DD;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 12px;
+  transition: width 0.3s ease;
+  min-width: 50px;
+
+  @media (max-width: 768px) {
+    padding-right: 4px;
+    font-size: 12px;
+  }
+}
+
+.bar-value {
+  color: @ped-white-100;
+  font-weight: 500;
+  font-size: 13px;
+}

@@ -1,0 +1,24 @@
+<ng-container *transloco="let t">
+  <div class="place-list">
+    <p class="title">{{ t("place-list.title") }}</p>
+
+    <div class="scroll">
+      @for (place of items(); track place.id) {
+        <ped-place-card
+          [title]="place.name"
+          [subTitle]="place.description"
+          [footerText]="place.address"
+          [options]="[
+            {
+              key: t('prop.phone_number'),
+              value: place.phoneNumber,
+            },
+          ]"
+          [link]="'../item/' + place.id"
+          class="card"
+        >
+        </ped-place-card>
+      }
+    </div>
+  </div>
+</ng-container>

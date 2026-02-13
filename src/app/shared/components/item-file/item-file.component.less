@@ -1,0 +1,46 @@
+@import 'mixins';
+@import 'colors';
+
+:host {
+    display: block;
+    padding: 9px 12px;
+    background: @ped-grey-100;
+    border-radius: 12px;
+    width: fit-content;
+
+    .item-file {
+        display: flex;
+        column-gap: 8px; 
+
+        &.cursor {
+            cursor: pointer;
+        }
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    .textes {
+        display: flex;
+        flex-direction: column;
+        row-gap: 4px;
+
+        .name {
+            .text(500, 14px, 110%);
+            display: -webkit-box;        /* делает контейнер WebKit-flex */
+            -webkit-box-orient: vertical; /* вертикальное направление */
+            -webkit-line-clamp: 1;       /* число видимых строк, здесь 1 */
+            overflow: hidden;             /* скрываем остальное */
+            text-overflow: ellipsis;      /* добавляем троеточие */
+        }
+
+
+        .type {
+            .text(400,12px,110%);
+            color: @ped-grey-1100;
+        }
+    }
+}
