@@ -14,6 +14,7 @@ import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { ToyCardComponent, ToyPointingComponent } from '../components';
 import {
   catchError,
+  filter,
   map,
   Observable,
   of,
@@ -22,11 +23,13 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { BaseResult } from '@api/models';
+import { BaseResult, VotingParticipant } from '@api/models';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { MODAL_OPTIONS } from '@constants';
+import { CompetitionsApiService } from '@api/controllers';
+import { FullnamePipe } from '@shared/pipes';
 
 @Component({
   selector: 'ped-toy-list',
@@ -36,6 +39,7 @@ import { MODAL_OPTIONS } from '@constants';
     NzButtonComponent,
     NzIconDirective,
     ToyCardComponent,
+    FullnamePipe,
   ],
   templateUrl: './toy-list.component.html',
   styleUrl: './toy-list.component.less',
@@ -52,10 +56,11 @@ export class ToyListComponent implements OnInit {
   readonly load$ = new Subject<void>();
 
   constructor(
-    private slService: SListService<any>,
+    private slService: SListService<VotingParticipant>,
     private notification: NzNotificationService,
     private destroyRef: DestroyRef,
     private nmService: NzModalService,
+    private competitionsApiService: CompetitionsApiService,
   ) {}
 
   ngOnInit(): void {
@@ -65,21 +70,34 @@ export class ToyListComponent implements OnInit {
     this.load$.next();
   }
 
-  onPointing(): void {
+  onPointing(videoSourceId: number): void {
     this.nmService
       .create({
         ...MODAL_OPTIONS,
         nzContent: ToyPointingComponent,
         nzClassName: 'custom-modal',
+        nzData: videoSourceId,
       })
-      .afterClose.pipe(switchMap(() => of()))
-      .subscribe();
+      .afterClose.pipe(
+        filter((form) => !!form),
+        switchMap((form) =>
+          this.competitionsApiService.uploadVotingVideoSource$(form),
+        ),
+      )
+      .subscribe({
+        next: () => {
+          this.notification.success(
+            translate('submit_vote.success.title'),
+            translate('submit_vote.success.desc'),
+          );
+        },
+      });
   }
 
-  private initToy$(): Observable<any[]> {
+  private initToy$(): Observable<VotingParticipant[]> {
     return this.load$.pipe(
       tap(() => this.slService.isLoading.set(true)),
-      switchMap(() => of({ result: [{ id: 1 }, { id: 2 }, { id: 3 }] })),
+      switchMap(() => this.competitionsApiService.getVotingParticipants$()),
       map(({ result }) => result),
       tap((result) => {
         this.slService.items.set(result);

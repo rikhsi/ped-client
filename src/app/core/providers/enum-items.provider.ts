@@ -11,6 +11,7 @@ import {
   DiplomaType,
   AppealStatus,
   CertificateStatus,
+  CompetitionStageStepType,
 } from '@app/api/models';
 import { AttestationType } from '@app/api/models';
 import { Languages } from '@constants';
@@ -85,6 +86,13 @@ export function enumItemsProvider(): EnumItemsResult {
     /** Статусы обращений/апелляций */
     appealStatus: createSelectItemByEnum(AppealStatus, 'appeal_status'),
 
+    /** Статусы сертификатов */
     certificateStatus: createSelectItemByEnum(CertificateStatus, 'cert_status'),
+
+    /** Типы шагов этапов конкурса */
+    competitionStageStep: createSelectItemByEnum(
+      CompetitionStageStepType,
+      'competition_stage_step',
+    ),
   };
 }

@@ -5,9 +5,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 20px;
+  row-gap: 8px;
+  max-width: 620px;
+
+  .video {
+    width: 100%;
+    margin: 0 auto;
+
+    iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+    }
+  }
 
   .card {
+    width: 100%;
     padding: 20px 16px;
     border-radius: 16px;
     background: @ped-white-100;
@@ -51,11 +64,12 @@
         align-items: center;
         justify-content: center;
         column-gap: 20px;
-        
+
         .point-btn {
-            padding: 14px 30px;
-            height: 50px;
-            border-radius: 8px;
+          width: 24%;
+          padding: 14px 30px;
+          height: 50px;
+          border-radius: 8px;
         }
       }
     }

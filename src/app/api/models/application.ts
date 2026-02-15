@@ -9,7 +9,7 @@ import { PedagogueCategory } from './category';
 import { AttachedCertificate } from './certificate';
 import { InstitutionShortItem } from './institution';
 import { PaginationResultWithItems } from './pagination';
-import { Season, SeasonShortItem } from './season';
+import { Season } from './season';
 import { ApplicationStatus } from './status';
 import { SubjectShortItem } from './subject';
 import { WorkDetail } from './work';
@@ -63,14 +63,31 @@ export enum ApplicationType {
  * и взаимодействия с backend / external services
  */
 export enum ApplicationTypeName {
+  /** Профессиональное обучение */
   PROFESSIONAL = 'professional',
+
+  /** Аттестация */
   ATTESTATION = 'attestation',
+
+  /** Управленческое направление */
   MANAGER = 'manager',
+
+  /** Диагностическое тестирование */
   DIAGNOSTIC = 'diagnostic',
+
+  /** MMTV */
   MMTV = 'mmtv',
+
+  /** PIIMA */
   PIIMA = 'piima',
+
+  /** Музыкальное направление */
   MUSIC = 'music',
+
+  /** Конкурс «Учитель года» */
   YEAR_TEACHER = 'year_teacher',
+
+  /** Удалённые регионы */
   DISTANT_AREAS = 'distant_areas',
 }
 
@@ -95,7 +112,7 @@ export interface ApplicationShortItem {
   /** Тип заявления */
   applicationType: ApplicationType;
 
-  /** Тип аттестации */
+  /** Тип аттестации (для аттестационных заявлений) */
   attestationType: AttestationType;
 
   /** Сезон */
@@ -108,11 +125,14 @@ export interface ApplicationShortItem {
 /**
  * Результат получения списка заявлений с пагинацией
  */
-export interface ApplicationsResult
-  extends BaseResult<PaginationResultWithItems<ApplicationShortItem>> {}
+export interface ApplicationsResult extends BaseResult<
+  PaginationResultWithItems<ApplicationShortItem>
+> {}
 
 /**
  * Полная информация о заявлении
+ *
+ * Содержит все данные по конкретному заявлению
  */
 export interface ApplicationItem {
   /** Идентификатор заявления */
@@ -192,6 +212,8 @@ export interface ApplicationRejectReason {
 
 /**
  * Элемент истории изменений заявления
+ *
+ * Содержит информацию о каждом действии оператора над заявлением
  */
 export interface ApplicationHistoryItem {
   /** Идентификатор записи */
@@ -212,6 +234,8 @@ export interface ApplicationHistoryItem {
 
 /**
  * Payload для создания / обновления заявления
+ *
+ * Используется при отправке данных на backend
  */
 export interface ApplicationPayload {
   /** Идентификатор учреждения */
@@ -239,13 +263,27 @@ export interface ApplicationPayload {
   diplomaId: number;
 }
 
+/**
+ * Ответ с данными для перенаправления на оплату
+ */
 export interface ApplicationPaymentRedirectResponse {
+  /** URL для callback после оплаты */
   callbackUrl: string;
+
+  /** Номер телефона */
   phoneNumber: string;
+
+  /** Идентификатор заявления */
   applicationId: number;
 }
 
+/**
+ * Результат запроса на перенаправление оплаты
+ */
 export interface ApplicationPaymentRedirectResult {
+  /** Идентификатор платежа */
   id: string;
+
+  /** URL для перенаправления на платёжный шлюз */
   redirectUrl: string;
 }

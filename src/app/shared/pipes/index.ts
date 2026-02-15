@@ -20,3 +20,4 @@ export * from './appeal-status.pipe';
 export * from './appeal-status-color.pipe';
 export * from './cert-status-color.pipe';
 export * from './cert-status.pipe';
+export * from './safe-resource-url.pipe';

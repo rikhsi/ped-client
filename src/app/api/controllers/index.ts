@@ -12,3 +12,4 @@ export * from './exam-locations-api.service';
 export * from './payment-api.service';
 export * from './salary-supplement-api.service';
 export * from './complaint-api.service';
+export * from './competitions-api.service';

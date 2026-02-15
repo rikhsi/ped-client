@@ -29,8 +29,16 @@
         [customLayout]="true"
         [emptyTitle]="'empty.toy'"
       >
-        @for (item of items(); track item.id) {
-          <ped-toy-card (pointingClick)="onPointing()" />
+        @for (item of items(); track item) {
+          <ped-toy-card
+            [fullName]="item.pedagogue | fullname"
+            [regionName]="item.institution.district?.name"
+            [districtName]="item.institution.district.region?.name"
+            [institutionName]="item.institution?.name"
+            [subjectName]="item.subject?.name"
+            [theme]="item.videoSource?.name"
+            (pointingClick)="onPointing(item.videoSource.id)"
+          />
         }
       </ped-box-infinite>
     </div>

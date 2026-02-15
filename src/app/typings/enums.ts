@@ -31,4 +31,5 @@ export type EnumList =
   | 'educationLevel' // Уровни образования
   | 'diplomaType' // Типы дипломов
   | 'appealStatus'
-  | 'certificateStatus'; // Статусы обращений
+  | 'certificateStatus' // Статусы обращений
+  | 'competitionStageStep';

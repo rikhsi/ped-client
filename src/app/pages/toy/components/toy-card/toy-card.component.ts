@@ -5,7 +5,6 @@ import {
   output,
 } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { UserFullName } from '@typings';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 
@@ -17,7 +16,7 @@ import { NzIconDirective } from 'ng-zorro-antd/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToyCardComponent {
-  fullName = input<UserFullName>();
+  fullName = input<string>();
   regionName = input<string>();
   districtName = input<string>();
   institutionName = input<string>();
