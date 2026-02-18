@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,13 +11,13 @@ import { MenuItem } from '@typings';
 
 @Component({
   selector: 'ped-main-sidebar-menu',
-  imports: [MenuItemComponent, TranslocoDirective],
+  imports: [MenuItemComponent, TranslocoDirective, NgClass],
   templateUrl: './main-sidebar-menu.component.html',
   styleUrl: './main-sidebar-menu.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainSidebarMenuComponent {
-  readonly menuItems = input<Partial<MenuItem>[]>();
+  readonly menuItems = input<Partial<MenuItem & {isMain: boolean}>[]>();
   readonly isVertical = input<boolean>();
 
   readonly logout = output<void>();

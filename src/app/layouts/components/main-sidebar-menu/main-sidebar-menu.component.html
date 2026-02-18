@@ -1,5 +1,5 @@
 <ng-container *transloco="let t">
-  <div class="profile-menu">
+  <div [ngClass]="{five: menuItems()?.length === 5}" class="profile-menu">
     <div class="menu-items-top">
       @for (item of menuItems(); track item.key) {
         @if (item.key !== "prop.logout") {
@@ -9,6 +9,8 @@
             [prefixIcon]="item.prefixIcon"
             [vertical]="isVertical()"
             [danger]="item.danger"
+            class="item"
+            [ngClass]="{main: item.isMain}"
           />
         }
       }

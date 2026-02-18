@@ -23,11 +23,11 @@ export const MAIN_LAYOUT_NAVIGATION_ITEMS: Partial<MenuItem>[] = [
     prefixIcon: 'o:briefcase',
     link: MainRoute.WORKPLACE,
   },
-  // {
-  //   key: 'page.toy',
-  //   prefixIcon: 'o:briefcase',
-  //   link: MainRoute.TEACHER_OF_YEAR,
-  // },
+  {
+    key: 'page.toy',
+    prefixIcon: 'o:cup',
+    link: MainRoute.TEACHER_OF_YEAR,
+  },
   {
     key: 'page.appeal',
     prefixIcon: 'o:direct',
@@ -45,7 +45,7 @@ export const MAIN_LAYOUT_NAVIGATION_ITEMS: Partial<MenuItem>[] = [
   },
 ];
 
-export const MAIN_LAYOUT_BOTTOM_MENU_ITEMS: Partial<MenuItem>[] = [
+export const MAIN_LAYOUT_BOTTOM_MENU_ITEMS: Partial<MenuItem & {isMain: boolean}>[] = [
   {
     key: 'modules.applications',
     prefixIcon: 'o:slider',
@@ -53,8 +53,14 @@ export const MAIN_LAYOUT_BOTTOM_MENU_ITEMS: Partial<MenuItem>[] = [
   },
   {
     key: 'modules.appeals',
-    prefixIcon: 'o:book',
+    prefixIcon: 'o:direct',
     link: '/main/appeal',
+  },
+  {
+    key: '',
+    prefixIcon: 'o:cup',
+    link: '/main/toy',
+    isMain: true
   },
   {
     key: 'modules.certificates',
