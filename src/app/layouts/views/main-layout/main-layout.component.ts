@@ -59,8 +59,23 @@ export class MainLayoutComponent implements OnInit {
   notificationList = computed(() => this.mlService.notificationList());
   showNavigation = computed(() => this.mlService.showNavigation());
 
-  navigation = MAIN_LAYOUT_NAVIGATION_ITEMS;
-  bottomMenu = MAIN_LAYOUT_BOTTOM_MENU_ITEMS;
+  navigation = computed(() => {
+    if (this.profile()?.hasErpData) {
+      return MAIN_LAYOUT_NAVIGATION_ITEMS;
+    }
+
+    return MAIN_LAYOUT_NAVIGATION_ITEMS.filter((item) => item.link !== 'toy');
+  });
+
+  bottomMenu = computed(() => {
+    if (this.profile()?.hasErpData) {
+      return MAIN_LAYOUT_BOTTOM_MENU_ITEMS;
+    }
+
+    return MAIN_LAYOUT_BOTTOM_MENU_ITEMS.filter(
+      (item) => item.link !== '/main/toy',
+    );
+  });
 
   readonly profile = computed(() => this.authService.user());
 

@@ -10,7 +10,7 @@
   <main class="main">
     <div class="container">
       <nav [ngClass]="{ hide: !showNavigation() }" class="navigation">
-        <ped-main-sidebar-menu [menuItems]="navigation" (logout)="logout()" />
+        <ped-main-sidebar-menu [menuItems]="navigation()" (logout)="logout()" />
       </nav>
 
       <div class="route">
@@ -20,6 +20,6 @@
   </main>
 
   <aside class="bottom-navigation">
-    <ped-main-sidebar-menu [menuItems]="bottomMenu" [isVertical]="true" />
+    <ped-main-sidebar-menu [menuItems]="bottomMenu()" [isVertical]="true" />
   </aside>
 </div>

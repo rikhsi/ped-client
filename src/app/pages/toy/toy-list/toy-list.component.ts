@@ -31,6 +31,96 @@ import { CompetitionsApiService, ProfileApiService } from '@api/controllers';
 import { FullnamePipe } from '@shared/pipes';
 import { DatePipe, NgClass } from '@angular/common';
 
+export const PED_TOY_CARD_MOCK: any[] = [
+  {
+    id: 1,
+    isTeacherOfYear: true,
+    interviewScore: 9.4,
+    votingScore: 8.7,
+    pedagogue: {
+      firstName: 'Анна',
+      lastName: 'Иванова',
+      middleName: 'Сергеевна',
+    },
+    institution: {
+      name: 'Гимназия №12',
+      district: {
+        name: 'Центральный район',
+        region: {
+          name: 'г. Алматы',
+        },
+      },
+    },
+    subject: {
+      name: 'Математика',
+    },
+    videoSource: {
+      id: 101,
+      name: 'Педагог года 2025',
+      url: 'https://example.com/video1.mp4',
+      thumbnail: 'https://example.com/video1.jpg',
+    },
+  },
+  {
+    id: 2,
+    isTeacherOfYear: false,
+    interviewScore: 8.1,
+    votingScore: 7.9,
+    pedagogue: {
+      firstName: 'Дмитрий',
+      lastName: 'Кузнецов',
+      middleName: 'Алексеевич',
+    },
+    institution: {
+      name: 'Школа-лицей №5',
+      district: {
+        name: 'Ауэзовский район',
+        region: {
+          name: 'г. Алматы',
+        },
+      },
+    },
+    subject: {
+      name: 'История',
+    },
+    videoSource: {
+      id: 102,
+      name: 'Открытый урок',
+      url: 'https://example.com/video2.mp4',
+      thumbnail: 'https://example.com/video2.jpg',
+    },
+  },
+  {
+    id: 3,
+    isTeacherOfYear: false,
+    interviewScore: 9.0,
+    votingScore: 9.2,
+    pedagogue: {
+      firstName: 'Мария',
+      lastName: 'Соколова',
+      middleName: 'Игоревна',
+    },
+    institution: {
+      name: 'Средняя школа №27',
+      district: {
+        name: 'Бостандыкский район',
+        region: {
+          name: 'г. Алматы',
+        },
+      },
+    },
+    subject: {
+      name: 'Английский язык',
+    },
+    videoSource: {
+      id: 103,
+      name: 'Инновационные методы обучения',
+      url: 'https://example.com/video3.mp4',
+      thumbnail: 'https://example.com/video3.jpg',
+    },
+  },
+];
+
 @Component({
   selector: 'ped-toy-list',
   imports: [
@@ -104,6 +194,7 @@ export class ToyListComponent implements OnInit {
   }
 
   private initToy$(): Observable<VotingParticipant[]> {
+    this.slService.items.set(PED_TOY_CARD_MOCK);
     return this.load$.pipe(
       tap(() => this.slService.isLoading.set(true)),
       switchMap(() => this.competitionsApiService.getVotingParticipants$()),

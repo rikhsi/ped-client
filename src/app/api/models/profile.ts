@@ -37,6 +37,8 @@ export interface Profile {
 
   /** Паспортные данные пользователя */
   passport: PassportItem;
+
+  hasErpData: boolean;
 }
 
 /**

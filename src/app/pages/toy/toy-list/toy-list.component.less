@@ -38,11 +38,11 @@
     display: flex;
     column-gap: 16px;
     flex: 1;
+    margin-top: 20px;
 
-    .active {
-      box-shadow: 0 0 11px 0 #56c3dd;
-      border-radius: 16px;
-    }
+    .media(@media-sm, {
+        margin-top: 10px;
+    });
   }
 
   .top {

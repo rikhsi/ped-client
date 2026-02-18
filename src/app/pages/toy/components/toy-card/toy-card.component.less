@@ -7,6 +7,20 @@
   width: 100%;
 }
 
+.video {
+  width: 210px;
+  height: 120px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-left: 20px;
+
+  .media(@media-lg, {
+    width: 100%;
+    height: 25svh;
+    margin-left: 0;
+  });
+}
+
 .toy-card {
   display: flex;
   gap: 16px;
@@ -34,27 +48,6 @@
 
   .step {
     .text(600,20px,110%);
-  }
-}
-
-.toy-icon {
-  flex-shrink: 0;
-  width: 210px;
-  height: 120px;
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .media(@media-sm, {
-    width: 100%;
-    height: auto;
-  });
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
   }
 }
 

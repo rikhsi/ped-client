@@ -4,13 +4,20 @@ import {
   input,
   output,
 } from '@angular/core';
+import { CompetitionVideoSource } from '@api/models';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { SafeResourceUrlPipe } from '@shared/pipes';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'ped-toy-card',
-  imports: [TranslocoDirective, NzButtonComponent, NzIconDirective],
+  imports: [
+    TranslocoDirective,
+    NzButtonComponent,
+    NzIconDirective,
+    SafeResourceUrlPipe,
+  ],
   templateUrl: './toy-card.component.html',
   styleUrl: './toy-card.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,6 +33,7 @@ export class ToyCardComponent {
   isTeacherOfYear = input<boolean>();
   interviewScore = input<number>();
   votingScore = input<number>();
+  video = input<CompetitionVideoSource>();
 
   pointingClick = output<void>();
 }

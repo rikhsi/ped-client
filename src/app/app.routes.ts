@@ -9,6 +9,7 @@ import {
   MainLayoutComponent,
   PlaceLayoutComponent,
 } from '@layouts/views';
+import { toyGuard } from '@pages/toy/guards';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,7 @@ export const routes: Routes = [
       },
       {
         path: MainRoute.TEACHER_OF_YEAR,
+        canActivate: [toyGuard],
         loadChildren: () =>
           import('@pages/toy/toy.routes').then((r) => r.routes),
       },
