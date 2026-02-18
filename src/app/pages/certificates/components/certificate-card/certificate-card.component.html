@@ -1,0 +1,50 @@
+<ng-container *transloco="let t">
+  <div class="certificate-info">
+    <div class="info-row">
+      <p
+        nz-typography
+        [nzCopyable]="true"
+        [nzCopyText]="serialNumber()"
+        class="value primary"
+      >
+        {{ serialNumber() }}
+      </p>
+      <p class="value">{{ subject() }}</p>
+    </div>
+  </div>
+
+  <div class="certificate-details">
+    <div class="info-row">
+      <p class="label">{{ t("certificate.givenDate") }}:</p>
+      <p class="value">{{ givenDate() | date: "dd.MM.yyyy" }}</p>
+    </div>
+
+    <div class="info-row">
+      <p class="label">{{ t("certificate.validityPeriod") }}:</p>
+      <p class="value">
+        {{
+          isEndless()
+            ? t("certificate.endless")
+            : (expireDate() | date: "dd.MM.yyyy")
+        }}
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p class="value">{{ category() | enumItem: "pedCategory" }}</p>
+
+    @if (showDownload()) {
+      <button
+        nz-button
+        nzType="primary"
+        [nzLoading]="isLoading()"
+        class="ripple border"
+        (click)="onClick()"
+      >
+        {{ t("action.download") }}
+        <span nz-icon nzType="o:arrowLeft" nzRotate="180"></span>
+      </button>
+    }
+  </div>
+</ng-container>

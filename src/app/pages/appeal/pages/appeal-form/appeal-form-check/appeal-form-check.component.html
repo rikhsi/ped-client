@@ -1,0 +1,90 @@
+<ng-container *transloco="let t">
+  <p class="title">{{ t("appeal.check") }}</p>
+
+  <div class="list">
+    <div class="box">
+      <p class="subtitle">{{ t("appeal.check.self") }}</p>
+
+      @if (user(); as user) {
+        <div class="card">
+          <div class="item">
+            <p class="label">{{ t("prop.fullname") }}</p>
+            <p class="value">{{ user | fullname }}</p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.pinfl") }}</p>
+            <p class="value">{{ user?.pinpp }}</p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.passport") }}</p>
+            <p class="value">
+              {{ user?.passport?.serial }}{{ user?.passport?.number }}
+            </p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.birthdate") }}</p>
+            <p class="value">{{ user?.birthDate | date: "dd.MM.yyyy" }}</p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.gender") }}</p>
+            <p class="value">{{ user?.gender | gender }}</p>
+          </div>
+        </div>
+      }
+
+      @if (application(); as application) {
+        <div class="card">
+          <div class="item">
+            <p class="label">{{ t("prop.application_number") }}</p>
+            <p class="value">{{ application?.applicationNumber }}</p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.subject") }}</p>
+            <p class="value">{{ application?.subject?.name }}</p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.season") }}</p>
+            <p class="value">{{ application?.season?.name }}</p>
+          </div>
+
+          <div class="item">
+            <p class="label">{{ t("prop.application_type") }}</p>
+            <p class="value">
+              {{ application?.applicationType | enumItem: "applicationType" }}
+            </p>
+          </div>
+
+          @if (application?.attestationType; as attType) {
+            <div class="item">
+              <p class="label">{{ t("prop.attestation_type") }}</p>
+              <p class="value">
+                {{ attType | enumItem: "attestationType" }}
+              </p>
+            </div>
+          }
+        </div>
+      }
+
+      <div class="card">
+        <div class="item">
+          <p class="label">{{ t("prop.complaint") }}</p>
+          <p class="value">{{ complaint()?.name }}</p>
+        </div>
+        <div class="item">
+          <p class="label">{{ t("prop.complaint_variant") }}</p>
+          <p class="value">{{ selectedComplaintVariant()?.value }}</p>
+        </div>
+        <div class="item">
+          <p class="label">{{ t("prop.comment") }}</p>
+          <p class="value">{{ appealForm.getRawValue()?.comment }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

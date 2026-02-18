@@ -1,0 +1,39 @@
+<ng-container *transloco="let t">
+  <p class="title">{{ t("appeal_form.info") }}</p>
+
+  <div [formGroup]="reasonForm" class="controls">
+    <div class="control">
+      <ped-item [label]="t('prop.test_action')" />
+      <ped-select-default
+        [placeholder]="t('prop.select')"
+        formControlName="complaintId"
+      >
+        @for (item of complaints(); track item.id) {
+          <nz-option [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+        }
+      </ped-select-default>
+    </div>
+
+    <div class="control">
+      <ped-item [label]="t('prop.test_question')" />
+      <ped-select-default
+        [placeholder]="t('prop.select')"
+        formControlName="complaintVariantId"
+      >
+        @for (item of selectedComplaint()?.variants; track item) {
+          <nz-option [nzValue]="item.id" [nzLabel]="item.value"></nz-option>
+        }
+      </ped-select-default>
+    </div>
+
+    <div class="control">
+      <ped-item [label]="t('prop.comment')" />
+      <textarea
+        nz-input
+        class="comment"
+        [placeholder]="t('prop.comment.desc')"
+        formControlName="comment"
+      ></textarea>
+    </div>
+  </div>
+</ng-container>

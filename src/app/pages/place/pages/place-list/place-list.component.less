@@ -1,0 +1,35 @@
+@import 'colors';
+@import 'mixins';
+
+:host {
+    min-height: 100%;
+}
+
+.place-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 28px 0;
+    height: 100%;
+
+    .title {
+        .text(700,16px,100%);
+        padding: 0 28px;
+    }
+
+    .scroll {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        padding: 16px 28px;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .scrollbar();
+    }
+
+    .card {
+        box-shadow: 0 4px 12px rgba(30, 30, 30, 0.15);
+    }
+}

@@ -1,0 +1,151 @@
+<ng-container *transloco="let t">
+  <p class="title">{{ t("attestation.info") }}</p>
+
+  <div [formGroup]="infoForm" class="controls">
+    <div class="control">
+      <ped-item [label]="t('prop.subject')" />
+      <ped-select-default
+        [placeholder]="t('prop.select')"
+        formControlName="subjectId"
+      >
+        @for (item of subjects(); track item.id) {
+          <nz-option [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+        }
+      </ped-select-default>
+    </div>
+
+    <div class="control">
+      <ped-item [label]="t('prop.language')" />
+      <ped-select-default
+        [placeholder]="t('prop.select')"
+        formControlName="language"
+      >
+        @for (item of languages(); track item) {
+          <nz-option
+            [nzValue]="item"
+            [nzLabel]="item | enumItem: 'language'"
+          ></nz-option>
+        }
+      </ped-select-default>
+    </div>
+
+    <div class="control">
+      <ped-item [label]="t('prop.current_category')" />
+      <ped-select-default
+        formControlName="category"
+        [placeholder]="t('prop.select')"
+      >
+        @for (category of [] | enumItems: "pedCategory"; track category.value) {
+          <nz-option
+            [nzValue]="category.value"
+            [nzLabel]="category.key"
+          ></nz-option>
+        }
+      </ped-select-default>
+    </div>
+
+    <div class="control">
+      <ped-item [label]="t('prop.attestation_type')" />
+      <ped-select-default
+        [placeholder]="t('prop.select')"
+        formControlName="attestationType"
+      >
+        @for (item of attestationTypeList(); track item) {
+          <nz-option
+            [nzValue]="item"
+            [nzLabel]="item | enumItem: 'attestationType'"
+          ></nz-option>
+        }
+      </ped-select-default>
+    </div>
+  </div>
+
+  @if (
+    infoForm.controls.attestationType.getRawValue() === 2 ||
+    infoForm.controls.attestationType.getRawValue() === 3
+  ) {
+    <div [formGroup]="agreementForm" class="checkboxes">
+      @if (season()?.showTeacherOfTheYearOption) {
+        <ped-application-agreement-card
+          [title]="t('year_teacher.title')"
+          [desc]="t('year_teacher.desc')"
+          [showDesc]="infoForm.controls.attestationType.getRawValue() === 2"
+          formControlName="yearTeacher"
+        />
+      }
+      @if (season()?.showMinisterFundAllowanceOption) {
+        <ped-application-agreement-card
+          [title]="t('ministry_font.title')"
+          [desc]="t('ministry_font.desc')"
+          [showDesc]="infoForm.controls.attestationType.getRawValue() === 2"
+          formControlName="ministry"
+        />
+      }
+
+      <ped-application-agreement-card
+        [title]="t('injured.title')"
+        formControlName="injured"
+      />
+
+      @if (
+        infoForm.controls.attestationType.getRawValue() === 2 && isFemale()
+      ) {
+        <ped-application-agreement-card
+          [title]="t('pregnant.title')"
+          formControlName="noPregnant"
+        />
+      }
+    </div>
+  }
+
+  @if (certificate(); as certificate) {
+    <div class="bottom">
+      <p class="title">{{ t("certificate.current_info") }}</p>
+
+      <div class="card">
+        <p class="item">
+          <span class="grey">{{ t("certifate.number") }}: </span>
+          <span
+            >{{ certificate?.serial?.serialKey }}
+            {{ certificate?.number }}</span
+          >
+        </p>
+        <p class="item">
+          <span class="grey">{{ t("certifate.valid_date") }}: </span>
+          <span
+            >{{ certificate?.givenDate | date: "dd.MM.yyyy" }} -
+            @if (certificate.expireDate; as expireDate) {
+              {{ expireDate | date: "dd.MM.yyyy" }}
+            } @else {
+              XXX
+            }
+          </span>
+        </p>
+      </div>
+    </div>
+  } @else {
+    @if (infoForm.controls.subjectId.getRawValue()) {
+      <nz-alert
+        nzType="warning"
+        [nzMessage]="t('certificate.no_error.title')"
+        [nzDescription]="t('certificate.no_error.description')"
+      ></nz-alert>
+    }
+  }
+
+  @if (agreementForm.controls.noPregnant.getRawValue() === "yes") {
+    <nz-alert
+      nzType="error"
+      [nzMessage]="t('pregnant.yes_error.title')"
+      [nzDescription]="t('pregnant.no_error.description')"
+    ></nz-alert>
+  }
+
+  @if (isEndless()) {
+    <nz-alert
+      nzType="success"
+      [nzMessage]="t('certificate.endless.title')"
+      [nzDescription]="t('certificate.endless.description')"
+    ></nz-alert>
+  }
+</ng-container>

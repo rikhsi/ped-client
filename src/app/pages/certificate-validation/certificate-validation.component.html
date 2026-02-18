@@ -1,0 +1,24 @@
+<div class="certificate-validation" *transloco="let t">
+  <div class="page-header">
+    <ped-logo class="logo" />
+
+    <button nz-button nzType="primary" class="back-button" (click)="goBack()">
+      <span nz-icon nzType="o:arrowLeft" class="button-icon"></span>
+      <span class="button-text">{{
+        t("certificateValidation.backToHome")
+      }}</span>
+    </button>
+  </div>
+
+  <div class="content-wrapper">
+    <ped-certificate-search
+      [isLoading]="isLoading()"
+      [certificateSeries]="serials()"
+      (search)="onSearch($event)"
+    />
+
+    @if (certificate()) {
+      <ped-certificate-details [certificate]="certificate()" />
+    }
+  </div>
+</div>

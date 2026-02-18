@@ -1,0 +1,110 @@
+<ng-container *transloco="let t">
+  <div class="video">
+    @if (votingVideoSource()) {
+      <iframe
+        [title]="votingVideoSource()?.name"
+        width="560"
+        height="315"
+        [src]="votingVideoSource()?.urls?.[0]?.url | safeResourceUrl"
+        allow="fullscreen"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+        style="border: 0px"
+      ></iframe>
+    }
+  </div>
+
+  @if (votingVideoSource()?.questions?.length) {
+    <div class="card">
+      <div class="header">
+        <p class="warning">
+          <nz-icon nzType="c:information" /> {{ "text.only_one_chance" }}
+        </p>
+        <ped-stepper
+          [currentStepIndex]="currentStepIndex()"
+          [stepsLength]="10"
+        />
+      </div>
+      <div [formGroup]="form">
+        @for (
+          question of votingVideoSource()?.questions;
+          track question;
+          let qIndex = $index
+        ) {
+          @if (currentStepIndex() == $index) {
+            <div class="content">
+              <div class="question">
+                <p>{{ question.title }}</p>
+
+                <p>
+                  {{ question.content }}
+                </p>
+              </div>
+              <div class="actions">
+                @for (
+                  scoreTemplate of question.scoreTemplates;
+                  track scoreTemplate;
+                  let sIndex = $index
+                ) {
+                  <button
+                    nz-button
+                    nzSize="large"
+                    class="point-btn"
+                    [nzType]="
+                      votesArray.at(qIndex).value.score === scoreTemplate.value
+                        ? 'primary'
+                        : 'default'
+                    "
+                    (click)="
+                      votesArray
+                        .at(qIndex)
+                        .patchValue({ score: scoreTemplate.value })
+                    "
+                  >
+                    {{ scoreTemplate.name }}
+                  </button>
+                }
+              </div>
+            </div>
+          }
+        }
+      </div>
+      <div class="footer">
+        <button
+          (click)="back()"
+          [disabled]="currentStepIndex() == 0"
+          nz-button
+          nzSize="large"
+          nzBlock
+        >
+          {{ t("prop.back") }}
+        </button>
+
+        @if (currentStepIndex() < 9) {
+          <button
+            (click)="next()"
+            nz-button
+            nzSize="large"
+            nzType="primary"
+            [disabled]="votesArray.at(currentStepIndex()).invalid"
+            nzBlock
+          >
+            {{ t("prop.next") }}
+          </button>
+        }
+
+        @if (currentStepIndex() == 9) {
+          <button
+            (click)="submit()"
+            nz-button
+            nzSize="large"
+            nzType="primary"
+            [disabled]="form.invalid"
+            nzBlock
+          >
+            {{ t("prop.submit") }}
+          </button>
+        }
+      </div>
+    </div>
+  }
+</ng-container>

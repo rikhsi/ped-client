@@ -1,0 +1,40 @@
+@import 'colors';
+@import 'mixins';
+
+.profile-main {
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px 32px;
+    padding: 24px;
+    border: 1px solid @ped-grey-200;
+    border-radius: 16px;
+    background: @ped-white-100;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .label {
+        .text(400, 12px, 16px);
+        color: #02A6CB;
+        margin: 0;
+      }
+
+      .value {
+        .text(400, 14px, 20px);
+        color: @ped-black-100;
+        margin: 0;
+      }
+    }
+  }
+}

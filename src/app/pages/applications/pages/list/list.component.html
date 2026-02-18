@@ -1,0 +1,73 @@
+<div class="box-wrapper" *transloco="let t">
+  <div class="container">
+    <div class="top">
+      <h1 class="title">{{ t("modules.applications.title") }}</h1>
+
+      @if (hasActiveSeason()) {
+        <button
+          [routerLink]="['select']"
+          nz-button
+          nzType="primary"
+          nzSize="large"
+          class="border create"
+        >
+          {{ t("actions.create_application") }}
+
+          <span nz-icon nzType="plus" class="icon"></span>
+        </button>
+      }
+    </div>
+
+    <div class="content">
+      <ped-box-infinite
+        [showContent]="!!items()?.length"
+        [isLoading]="isLoading()"
+        [emptyTitle]="'empty.applications'"
+        (onScroll)="onScroll()"
+      >
+        @for (item of items(); track item.id) {
+          @switch (item.applicationType) {
+            @case (2) {
+              <ped-application-card
+                [title]="item.applicationNumber"
+                [subTitle]="item.subject.name"
+                [applicationType]="item.applicationType"
+                [options]="[
+                  {
+                    key: t('prop.season'),
+                    value: item.season.name,
+                  },
+                  {
+                    key: t('prop.attestation_type'),
+                    value: item.attestationType | enumItem: 'attestationType',
+                  },
+                ]"
+                [status]="item.status"
+                [footerText]="item.createdAt | date: 'dd.MM.yyyy HH:mm'"
+                [link]="'self/' + item.id"
+              >
+              </ped-application-card>
+            }
+            @default {
+              <ped-application-card
+                [title]="item.applicationNumber"
+                [subTitle]="item.subject.name"
+                [applicationType]="item.applicationType"
+                [options]="[
+                  {
+                    key: t('prop.season'),
+                    value: item.season.name,
+                  },
+                ]"
+                [status]="item.status"
+                [footerText]="item.createdAt | date: 'dd.MM.yyyy HH:mm'"
+                [link]="'self/' + item.id"
+              >
+              </ped-application-card>
+            }
+          }
+        }
+      </ped-box-infinite>
+    </div>
+  </div>
+</div>

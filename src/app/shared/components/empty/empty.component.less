@@ -1,0 +1,63 @@
+@import 'colors';
+@import 'mixins';
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+    user-select: none;
+
+    &.small {
+        .empty-icon {
+            max-width: 90px;
+            max-height: 90px;
+        }
+
+        .empty-title {
+            font-size: 14px;
+        }
+    }
+
+    .empty-icon {
+        max-width: 160px;
+        max-height: 160px;
+        margin-bottom: 8px;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .empty-title {
+    .text(600, 20px, 28px);
+    color: @ped-black-100;
+    margin: 0;
+
+        .media(@media-sm, {
+            font-size: 18px;
+            line-height: 24px;
+        });
+    }
+
+    .empty-description {
+        .text(400, 14px, 20px);
+        color: @ped-grey-400;
+        margin: 0;
+        max-width: 500px;
+
+        .media(@media-sm, {
+            font-size: 13px;
+            line-height: 18px;
+        });
+    }
+
+    .empty-link {
+        color: #02A6CB;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

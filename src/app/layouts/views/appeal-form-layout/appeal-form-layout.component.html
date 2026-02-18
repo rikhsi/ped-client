@@ -1,0 +1,21 @@
+<ng-container *transloco="let t">
+  <div class="afl">
+    <div class="box">
+      <ped-afl-navigation
+        [name]="t('appeal.create')"
+        [currentStepIndex]="currentStepIndex()"
+        [steps]="steps()"
+      />
+
+      @if (routeListenerReady()) {
+        <ped-afl-content
+          [buttons]="buttons()"
+          (onBack)="onBack()"
+          (onCancel)="onCancel()"
+          (onNext)="onNext()"
+          (onSend)="onSend()"
+        />
+      }
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,50 @@
+@import 'colors';
+@import 'mixins';
+
+.modal-confirm {
+    width: 450px;
+    border-radius: 16px;
+    background: @ped-white-100;
+    padding: 16px 24px;
+
+    .media(@media-sm, {
+        width: 100%;
+        padding: 16px;
+    });
+
+    .title {
+        .text(600,18px,100%);
+        color: @ped-black-100;
+        margin-bottom: 8px;
+
+        .media(@media-sm, {
+            font-size: 16px;
+        });
+    }
+
+    .description {
+        .text(400,14px,100%);
+        color: @ped-grey-400;
+        margin-bottom: 30px;
+
+        .media(@media-sm, {
+            margin-bottom: 20px;
+        });
+    }
+
+    .footer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        column-gap: 12px;
+
+        .media(@media-sm, {
+            flex-direction: column;
+            gap: 8px;
+
+            button {
+                width: 100%;
+            }
+        });
+    }
+}

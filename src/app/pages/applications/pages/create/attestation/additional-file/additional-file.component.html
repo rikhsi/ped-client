@@ -1,0 +1,14 @@
+<ng-container *transloco="let t">
+  <div class="infos">
+    <p class="title">{{ t("extra.infos") }}</p>
+    <p class="description">{{ t("extra.select") }}</p>
+  </div>
+
+  <ped-application-drop-file
+    [formControl]="control"
+    [title]="t('extra.file')"
+    (removed)="removeFile()"
+  >
+    <p class="desc">{{ t("extra.file.description") }}</p>
+  </ped-application-drop-file>
+</ng-container>

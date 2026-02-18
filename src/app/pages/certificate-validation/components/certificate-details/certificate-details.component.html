@@ -1,0 +1,72 @@
+<div class="details-card" *transloco="let t">
+  <div class="card-header">
+    <h2 class="title">{{ t("certificateValidation.detailsTitle") }}</h2>
+    <ped-chip [color]="certificate()?.status | certStatusColor">{{
+      certificate()?.status | certStatus
+    }}</ped-chip>
+  </div>
+
+  <div class="details-grid">
+    <div class="detail-item">
+      <span class="detail-label"
+        >{{ t("certificateValidation.fullName") }}:</span
+      >
+      <span class="detail-value">{{
+        certificate()?.pedagogue | fullname
+      }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label">{{ t("certificateValidation.region") }}:</span>
+      <span class="detail-value">{{
+        certificate()?.institution?.district?.region?.name
+      }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label"
+        >{{ t("certificateValidation.district") }}:</span
+      >
+      <span class="detail-value">{{
+        certificate()?.institution?.district?.name
+      }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label"
+        >{{ t("certificateValidation.institution") }}:</span
+      >
+      <span class="detail-value">{{ certificate().institution?.name }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label"
+        >{{ t("certificateValidation.subject") }}:</span
+      >
+      <span class="detail-value">{{ certificate().subject?.name }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label"
+        >{{ t("certificateValidation.seriesAndNumber") }}:</span
+      >
+      <span class="detail-value highlight"
+        >{{ certificate().serial?.serialKey }} {{ certificate()?.number }}</span
+      >
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label"
+        >{{ t("certificateValidation.issueDate") }}:</span
+      >
+      <span class="detail-value">{{ certificate()?.givenDate }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label"
+        >{{ t("certificateValidation.expiryDate") }}:</span
+      >
+      <span class="detail-value">{{ certificate()?.validTo }}</span>
+    </div>
+  </div>
+</div>

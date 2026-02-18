@@ -1,0 +1,53 @@
+<ng-container *transloco="let t">
+  <router-outlet />
+
+  <div class="buttons">
+    @if (buttons()?.cancel?.show) {
+      <button
+        nz-button
+        nzType="primary"
+        class="grey"
+        [disabled]="buttons()?.cancel?.disabled"
+        [nzLoading]="buttons()?.cancel?.loading"
+        (click)="onCancel.emit()"
+      >
+        {{ t("action.cancel") }}
+      </button>
+    }
+    @if (buttons()?.back?.show) {
+      <button
+        nz-button
+        nzType="default"
+        class="grey"
+        [disabled]="buttons()?.back?.disabled"
+        [nzLoading]="buttons()?.back?.loading"
+        (click)="onBack.emit()"
+      >
+        {{ t("action.back") }}
+      </button>
+    }
+    @if (buttons()?.next?.show) {
+      <button
+        nz-button
+        [disabled]="buttons()?.next?.disabled"
+        [nzLoading]="buttons()?.next?.loading"
+        nzType="primary"
+        (click)="onNext.emit()"
+      >
+        {{ t("action.next") }}
+      </button>
+    }
+
+    @if (buttons()?.send?.show) {
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="buttons()?.send?.disabled"
+        [nzLoading]="buttons()?.send?.loading"
+        (click)="onSend.emit()"
+      >
+        {{ t("action.send") }}
+      </button>
+    }
+  </div>
+</ng-container>

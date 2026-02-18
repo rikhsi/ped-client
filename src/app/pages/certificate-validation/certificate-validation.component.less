@@ -1,0 +1,99 @@
+@import 'colors';
+@import 'mixins';
+
+.certificate-validation {
+    min-height: 100vh;
+    background: #F8F9FC;
+    padding: 24px;
+
+    .media(@media-sm, {
+        padding: 16px;
+    });
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .media(@media-sm, {
+        margin-bottom: 16px;
+    });
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: -12px;
+
+    .media(@media-sm, {
+        margin-left: 0;
+    });
+}
+
+.back-button {
+    height: 40px;
+    padding: 0 24px;
+    background: transparent;
+    border: 1px solid #56C3DD;
+    border-radius: 8px;
+    .text(500, 14px, 20px);
+    color: #56C3DD;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    [nz-icon] {
+        color: #56C3DD;
+        font-size: 16px;
+    }
+
+    &:hover {
+        background: #56C3DD;
+        color: @ped-white-100;
+
+        [nz-icon] {
+            color: @ped-white-100;
+        }
+    }
+
+    .media(@media-md, {
+        padding: 0 16px;
+        font-size: 13px;
+        gap: 6px;
+    });
+
+.media(@media-sm, {
+    padding: 0;
+    width: 40px;
+    min-width: 40px;
+    justify-content: center;
+
+    // Hide text on mobile, show only icon
+    .button-text {
+        display: none;
+    }
+
+    .button-icon {
+        font-size: 18px;
+    }
+});
+}
+
+.button-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.button-text {
+    white-space: nowrap;
+}
+
+.content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}

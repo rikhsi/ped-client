@@ -1,0 +1,31 @@
+<ng-container *transloco="let t">
+  <nz-spin
+    [nzSpinning]="isLoading() && !showContent()"
+    [nzSize]="'large'"
+    class="loader"
+  >
+    <div
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll.emit()"
+      [ngClass]="{full: !showContent()}"
+      class="box-infinite"
+    >
+      @if (showContent()) {
+      <div class="content" [ngClass]="{ custom: customLayout() }">
+        <ng-content />
+      </div>
+      } @else { @if (!isLoading()) {
+      <div class="result">
+        <ped-empty [title]="t(emptyTitle())" class="empty" />
+      </div>
+
+      } }
+    </div>
+
+    @if (showContent() && isLoading()) {
+    <ped-loading size="large" class="loading" />
+    }
+  </nz-spin>
+</ng-container>

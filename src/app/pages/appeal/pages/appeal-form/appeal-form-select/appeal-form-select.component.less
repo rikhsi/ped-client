@@ -1,0 +1,106 @@
+@import 'colors';
+@import 'mixins';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+
+    .infos {
+        display: flex;
+        flex-direction: column;
+        row-gap: 6px;
+
+        .media(@media-sm, {
+            background: @ped-grey-100;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 10px;
+        });
+
+        .title {
+            .text(600,20px,110%);
+        }       
+
+        .description {
+            .text(400,14px,110%);
+            color: @ped-grey-1100;
+        }
+    }
+
+    .desc {
+        .text(400,18px,110%);
+    }
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 4px;
+    max-height: calc(40svh);
+
+    &.empty {
+        min-height: 42svh;
+        max-height: none;
+        height: auto;
+        overflow: hidden;
+        scroll-behavior: smooth;
+    }
+
+    .scrollbar();
+
+    .list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 24px;
+
+        [nz-radio] {
+            width: 100%;
+            background: @ped-white-100;
+            padding: 16px;
+            border-radius: 16px;
+            user-select: none;
+            transition: 0.3s all;
+            border: 2px solid @ped-white-100;
+
+            .media(@media-sm, {
+                border: 2px solid @ped-grey-300;
+
+                &.selected {
+                    background: @ped-blue-200;
+                }
+            });
+
+            &.selected {
+                border: 2px solid @ped-blue-100;
+            }
+
+            h3 {
+                .text(600,16px,110%);
+                margin-bottom: 6px;
+                color: @ped-blue-100;
+            }
+            
+            h4 {
+                .text(500,14px,110%);
+                margin-bottom: 12px;
+                color: @ped-black-100;
+            }
+
+            .item {
+                .text(400,14px,110%);
+                color: @ped-grey-400;
+                margin-bottom: 4px;
+            }
+        }
+    }
+
+    .application-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 100%;
+    }
+}

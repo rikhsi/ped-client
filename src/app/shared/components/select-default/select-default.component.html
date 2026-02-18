@@ -1,0 +1,31 @@
+<nz-form-item>
+  <nz-form-control
+    [nzHasFeedback]="isFeedback()"
+    [nzValidateStatus]="status()"
+    [nzErrorTip]="message()"
+    [nzValidatingTip]="message()"
+    [nzWarningTip]="message()"
+    [nzSuccessTip]="message()"
+  >
+    <nz-select
+      [nzSize]="size()"
+      [nzId]="label()"
+      [(ngModel)]="value"
+      [nzShowSearch]="showSearch()"
+      (ngModelChange)="onModelChange($event)"
+      [nzPlaceHolder]="placeholder()"
+      [nzLoading]="isLoading()"
+      [disabled]="disabled() || !optionList().length || isLoading()"
+      (click)="clicked.emit()"
+      (nzFocus)="focus.emit()"
+      (nzBlur)="blur.emit()"
+    >
+      @for (option of optionList(); track option.nzValue) {
+        <nz-option
+          [nzValue]="option.nzValue"
+          [nzLabel]="option.nzLabel"
+        ></nz-option>
+      }
+    </nz-select>
+  </nz-form-control>
+</nz-form-item>

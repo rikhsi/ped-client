@@ -1,0 +1,58 @@
+<ng-container *transloco="let t">
+  <div [formGroup]="form" class="controls">
+    <div class="control">
+      <ped-item [label]="t('prop.region')" />
+      <ped-select-default
+        [placeholder]="t('prop.select')"
+        formControlName="regionId"
+        [isLoading]="isRegionLoading()"
+      >
+        @for (item of regions(); track item.id) {
+          <nz-option [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+        }
+      </ped-select-default>
+    </div>
+
+    <div class="control">
+      <ped-item [label]="t('prop.district')" />
+      <ped-select-default
+        [placeholder]="t('prop.select')"
+        formControlName="districtId"
+        [isLoading]="isDistrictLoading()"
+      >
+        @for (item of districts(); track item.id) {
+          <nz-option [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+        }
+      </ped-select-default>
+    </div>
+
+    <div class="control">
+      <ped-item [label]="t('prop.edu_direction')" />
+      <ped-select-default
+        [placeholder]="t('prop.select')"
+        formControlName="eduDirection"
+        [isLoading]="isDirectionLoading()"
+      >
+        @for (item of eduDirections(); track item) {
+          <nz-option
+            [nzValue]="item"
+            [nzLabel]="item | enumItem: 'eduDirection'"
+          ></nz-option>
+        }
+      </ped-select-default>
+    </div>
+
+    <div class="control">
+      <ped-item [label]="t('prop.institution')" />
+      <ped-select-default
+        [placeholder]="t('prop.select')"
+        formControlName="institutionId"
+        [isLoading]="isInstitutionLoading()"
+      >
+        @for (item of institutions(); track item.id) {
+          <nz-option [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+        }
+      </ped-select-default>
+    </div>
+  </div>
+</ng-container>

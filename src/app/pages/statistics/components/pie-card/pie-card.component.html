@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="upper">
+    {{ title() }}
+  </div>
+  <div class="inner">
+    @if (chartOptions(); as chartOptions) {
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [stroke]="chartOptions.stroke"
+        [labels]="chartOptions.labels"
+        [legend]="chartOptions.legend"
+        [responsive]="chartOptions.responsive"
+        [colors]="chartOptions.colors"
+        [states]="chartOptions.states"
+        [plotOptions]="chartOptions.plotOptions"
+      >
+      </apx-chart>
+    }
+
+    <div class="items">
+      @for (item of chartOptions()?.optionData; track $index) {
+        <div class="item">
+          <span
+            nz-icon
+            [nzType]="item.icon"
+            [style.color]="item.iconColor"
+            class="icon"
+            [style.background]="item.bg"
+          >
+          </span>
+          <span class="percent">{{ item.percent }}%</span>
+          <span class="text">{{ item.title }}</span>
+          <span class="count" [style.color]="item.iconColor">{{
+            item.count
+          }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</div>

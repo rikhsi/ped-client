@@ -1,0 +1,65 @@
+<ng-container *transloco="let t">
+  <div class="info">
+    <div class="desktop">
+      <button
+        nz-button
+        routerLink="/main/appeal"
+        nzType="primary"
+        class="ripple grey"
+      >
+        <span nz-icon nzType="arrow-left"></span>
+        {{ t("action.back") }}
+      </button>
+
+      <p class="number">{{ t("prop.appeal_id") }}: {{ number() }}</p>
+
+      <ped-chip [color]="status() | appealStatusColor">{{
+        status() | appealStatus
+      }}</ped-chip>
+    </div>
+
+    <div class="mobile">
+      <div class="col">
+        <button
+          nz-button
+          routerLink="/main/appeal"
+          nzType="primary"
+          class="ripple grey"
+        >
+          <span nz-icon nzType="arrow-left"></span>
+          {{ t("action.back") }}
+        </button>
+
+        <p class="number">{{ number() }}</p>
+      </div>
+
+      <div class="col">
+        <ped-chip [color]="status() | appealStatusColor">{{
+          status() | appealStatus
+        }}</ped-chip>
+
+        <button
+          nz-button
+          nzType="primary"
+          [nzLoading]="loading()"
+          class="ripple grey load load-mobile"
+          (click)="load.emit()"
+        >
+          <span nz-icon nzType="o:download"></span>
+          {{ t("action.appeal_load") }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button
+    nz-button
+    nzType="primary"
+    [nzLoading]="loading()"
+    class="ripple grey load load-desktop"
+    (click)="load.emit()"
+  >
+    <span nz-icon nzType="o:download"></span>
+    {{ t("action.appeal_load") }}
+  </button>
+</ng-container>

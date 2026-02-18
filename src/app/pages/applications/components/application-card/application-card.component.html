@@ -1,0 +1,38 @@
+<div class="top">
+  <div class="texts">
+    <p class="title">{{ title() }}</p>
+    <p [ngClass]="{ empty: !subTitle() }" class="sub-title">
+      {{ subTitle() ?? "--" }}
+    </p>
+  </div>
+
+  @if (status(); as status) {
+    <ped-chip [color]="status | applicationStatusColor: 2">{{
+      status | applicationStatus: applicationType()
+    }}</ped-chip>
+  }
+</div>
+<div class="options">
+  @for (option of limitedOptions(); track option.key) {
+    <ped-item [label]="option.key" [value]="option.value"> </ped-item>
+  }
+</div>
+<div class="footer">
+  <div class="left">
+    <p>{{ footerText() }}</p>
+    <p class="ellipsed">
+      {{ applicationType() | enumItem: "applicationType" }}
+    </p>
+  </div>
+  <button
+    nz-button
+    nzType="primary"
+    class="ripple border grey"
+    [routerLink]="link()"
+    (click)="clicked.emit()"
+  >
+    {{ buttonText() }}
+
+    <span nz-icon nzType="o:arrowLeft" nzRotate="180"></span>
+  </button>
+</div>

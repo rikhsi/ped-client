@@ -1,0 +1,41 @@
+@import 'mixins';
+
+.label {
+    .text(500, 14px, normal);
+    height: auto;
+    margin-bottom: 4px;
+  }
+
+:host {
+    display: block;
+
+    ::ng-deep .ant-select-selection-placeholder {
+        .text(400,14px,100%);
+    }
+
+    ::ng-deep .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+        height: 44px;
+
+        .ant-select-selection-search-input {
+            height: 42px;
+        }
+    }
+
+    ::ng-deep {
+        .ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+            border-radius: 10px;
+        }
+
+        .ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+            border-radius: 10px;
+        }
+    }
+
+    ::ng-deep .ant-select-single.ant-select-lg:not(.ant-select-customize-input) .ant-select-selector {
+        height: 50px;
+
+        .ant-select-selection-search-input {
+            height: 48px;
+        }
+    }
+}

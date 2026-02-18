@@ -1,0 +1,201 @@
+@import 'colors';
+@import 'mixins';
+
+.faq {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 20px;
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+
+        .title {
+            .text(700, 32px, 120%);
+            color: @ped-black-100;
+            margin: 0;
+        }
+
+        .description {
+            .text(400, 16px, 150%);
+            color: @ped-grey-400;
+            margin: 0;
+        }
+    }
+
+    .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .faq-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+
+            .faq-row {
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                cursor: pointer;
+
+                .icon-wrapper {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 48px;
+                    height: 48px;
+                    min-width: 48px;
+                    border-radius: 50%;
+                    background: #F7F8F8;
+                    transition: all 0.3s ease;
+
+                    [nz-icon] {
+                        font-size: 20px;
+                        color: #7D8BA1;
+                        transition: all 0.3s ease;
+                    }
+                }
+
+                .faq-box {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                    padding: 16px 20px;
+                    background: #F7F8F8;
+                    border-radius: 16px;
+                    transition: all 0.3s ease;
+
+                    .question {
+                        flex: 1;
+                        .text(500, 16px, 150%);
+                        color: #7D8BA1;
+                        transition: all 0.3s ease;
+                    }
+
+                    .arrow {
+                        font-size: 16px;
+                        color: #7D8BA1;
+                        transition: all 0.3s ease;
+                        min-width: 16px;
+                    }
+                }
+            }
+
+            &.open {
+                .faq-row {
+                    .icon-wrapper {
+                        background: #56C3DD;
+
+                        [nz-icon] {
+                            color: @ped-white-100; // visible on dark background
+                        }
+                    }
+
+                    .faq-box {
+                        background: #56C3DD;
+                        border-radius: 16px;
+
+                        .question {
+                            color: @ped-white-100;
+                        }
+
+                        .arrow {
+                            color: @ped-white-100;
+                        }
+                    }
+                }
+            }
+
+            .faq-content {
+                overflow: hidden;
+                margin-left: 60px;
+
+                .answer {
+                    padding: 20px;
+                    .text(400, 14px, 150%);
+                    color: #242426;
+                    background: @ped-white-100;
+                    border-radius: 0 0 16px 16px;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 32px 12px;
+        gap: 24px;
+
+        .header {
+            gap: 8px;
+
+            .title {
+                font-size: 20px;
+            }
+
+            .description {
+                font-size: 13px;
+            }
+        }
+
+        .faq-list {
+            gap: 10px;
+
+            .faq-item {
+                .faq-row {
+                    gap: 10px;
+
+                    .icon-wrapper {
+                        width: 36px;
+                        height: 36px;
+                        min-width: 36px;
+
+                        [nz-icon] {
+                            font-size: 16px;
+                        }
+                    }
+
+                    .faq-box {
+                        padding: 12px 14px;
+                        border-radius: 12px;
+                        gap: 12px;
+
+                        .question {
+                            font-size: 14px;
+                            line-height: 140%;
+                        }
+
+                        .arrow {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                .faq-content {
+                    margin-left: 46px;
+
+                    .answer {
+                        padding: 14px;
+                        font-size: 12px;
+                        line-height: 140%;
+                        border-radius: 0 0 12px 12px;
+                    }
+                }
+
+                &.open {
+                    .faq-row {
+                        .faq-box {
+                            border-radius: 12px 12px 0 0 !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

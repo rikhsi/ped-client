@@ -1,0 +1,51 @@
+<ng-container *transloco="let t">
+  <section class="box">
+    <h1>{{ t("title.select_season") }}</h1>
+
+    <nz-radio-group [formControl]="seasonControl" class="radio-group">
+      <div class="list">
+        @for (season of activeSeasons(); track season.id) {
+          <label
+            nz-radio
+            [nzValue]="season.id"
+            class="option-box"
+            [ngClass]="{ selected: seasonControl.getRawValue() === season.id }"
+          >
+            <h3>{{ season.applicationType | enumItem: "applicationType" }}</h3>
+            <h4>{{ season.name }}</h4>
+            <p>{{ season.description }}</p>
+          </label>
+        } @empty {
+          <ped-empty [title]="t('empty.active_seasons')"></ped-empty>
+        }
+      </div>
+    </nz-radio-group>
+
+    <div class="actions">
+      <button
+        nz-button
+        nzType="primary"
+        nzSize="large"
+        routerLink="../"
+        [disabled]="seasonControl.disabled"
+        class="cancel"
+      >
+        {{ t("action.cancel") }}
+      </button>
+
+      @if (!!activeSeasons().length) {
+        <button
+          nz-button
+          nzType="primary"
+          nzSize="large"
+          [disabled]="seasonControl.invalid"
+          [nzLoading]="seasonControl.disabled"
+          (click)="openApplication()"
+          class="submit"
+        >
+          {{ t("action.next") }}
+        </button>
+      }
+    </div>
+  </section>
+</ng-container>

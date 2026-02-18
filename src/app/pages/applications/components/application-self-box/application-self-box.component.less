@@ -1,0 +1,22 @@
+@import 'colors';
+@import 'mixins';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid @ped-grey-300;
+
+    .media(@media-sm, {
+        padding: 14px;
+    });
+
+    .box-title {
+        .text(500,20px, 110%);
+        color: @ped-black-100;
+        border-bottom: 1px solid @ped-grey-300;
+        margin-bottom: 24px;
+        padding-bottom: 24px;
+    }
+}

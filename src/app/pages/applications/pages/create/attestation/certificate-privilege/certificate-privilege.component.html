@@ -1,0 +1,94 @@
+<ng-container *transloco="let t">
+  <div class="infos">
+    <p class="title">{{ t("cert_privilege.infos") }}</p>
+    <p class="description">{{ t("cert_privilege.select") }}</p>
+  </div>
+
+  <div [formGroup]="form" class="form">
+    <nz-radio-group
+      formControlName="certificateId"
+      class="radio-group"
+      [ngClass]="{ empty: isEmpty() }"
+    >
+      <ped-box-infinite
+        [showContent]="!isEmpty()"
+        [isLoading]="isLoading()"
+        [customLayout]="true"
+        [emptyTitle]="'empty.cert_privilege'"
+      >
+        <div class="list">
+          @for (cert of nationalCertificates(); track cert.customId) {
+            <label nz-radio [nzValue]="cert.customId" class="card">
+              <div class="box">
+                <p class="item">
+                  <span class="grey">{{ t("certifate.subject") }}: </span>
+                  <span>{{ cert?.subject?.name }} </span>
+                </p>
+                <p class="item">
+                  <span class="grey">{{ t("certifate.type_study") }}: </span>
+                  <span>{{ cert?.eduStudyCertificateTypeName }} </span>
+                </p>
+                <p class="item">
+                  <span class="grey">{{ t("certifate.type_level") }}: </span>
+                  <span>{{ cert?.certificateTypeLevelName }} </span>
+                </p>
+                <p class="item">
+                  <span class="grey">{{ t("certifate.serial") }}: </span>
+                  <span
+                    >{{ cert?.documentSeries }}{{ cert.documentNumber }}
+                  </span>
+                </p>
+                <p class="item">
+                  <span class="grey">{{ t("certifate.valid_date") }}: </span>
+                  <span
+                    >{{ cert?.startDate }} -
+                    @if (cert.endDate; as expireDate) {
+                      {{ expireDate }}
+                    } @else {
+                      XXX
+                    }
+                  </span>
+                </p>
+              </div>
+            </label>
+          }
+          @for (cert of stcCertificates(); track cert.customId) {
+            <label nz-radio [nzValue]="cert.customId" class="card">
+              <div class="box">
+                <p class="item">
+                  <span class="grey">{{ t("certifate.subject") }}: </span>
+                  <span>{{ cert?.subject?.name }} </span>
+                </p>
+                <p class="item">
+                  <span class="grey">{{ t("certifate.type_level") }}: </span>
+                  <span>{{ cert?.level }} </span>
+                </p>
+                <p class="item">
+                  <span class="grey">{{ t("certifate.serial") }}: </span>
+                  <span>{{ cert?.number }} </span>
+                </p>
+                <p class="item">
+                  <span class="grey">{{ t("certifate.valid_date") }}: </span>
+                  <span
+                    >{{ cert?.startDate }} -
+                    @if (cert.endDate; as expireDate) {
+                      {{ expireDate }}
+                    } @else {
+                      XXX
+                    }
+                  </span>
+                </p>
+              </div>
+            </label>
+          }
+        </div>
+      </ped-box-infinite>
+    </nz-radio-group>
+
+    @if (!isEmpty()) {
+      <label nz-checkbox formControlName="use">{{
+        t("cert_privilege.use")
+      }}</label>
+    }
+  </div>
+</ng-container>
