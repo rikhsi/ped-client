@@ -15,6 +15,7 @@ import {
   NationalCertificatesResult,
   PaginationResponse,
   PaginationResultWithItems,
+  ERPItem,
 } from '@api/models';
 import { Observable } from 'rxjs';
 import { HttpContext, HttpParams } from '@angular/common/http';
@@ -235,5 +236,13 @@ export class ProfileApiService {
     return this.baseApi.getQuery$(`${this.endpoint}/ekadr-redirect-url`, {
       params,
     });
+  }
+
+  public syncErpData$(): Observable<BaseResult<number>> {
+    return this.baseApi.getQuery$(`${this.endpoint}/erp-data/sync`);
+  }
+
+  public getErpData$(): Observable<BaseResult<ERPItem>> {
+    return this.baseApi.getQuery$(`${this.endpoint}/erp-data`);
   }
 }

@@ -23,6 +23,9 @@ export class ToyCardComponent {
   subjectName = input<string>();
   theme = input<string>();
   stepCount = input<number>(2);
+  isTeacherOfYear = input<boolean>();
+  interviewScore = input<number>();
+  votingScore = input<number>();
 
   pointingClick = output<void>();
 }

@@ -23,11 +23,11 @@ export const MAIN_LAYOUT_NAVIGATION_ITEMS: Partial<MenuItem>[] = [
     prefixIcon: 'o:briefcase',
     link: MainRoute.WORKPLACE,
   },
-  {
-    key: 'page.toy',
-    prefixIcon: 'o:briefcase',
-    link: MainRoute.TEACHER_OF_YEAR,
-  },
+  // {
+  //   key: 'page.toy',
+  //   prefixIcon: 'o:briefcase',
+  //   link: MainRoute.TEACHER_OF_YEAR,
+  // },
   {
     key: 'page.appeal',
     prefixIcon: 'o:direct',

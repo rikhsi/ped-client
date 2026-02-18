@@ -1,6 +1,5 @@
 import { BaseResult } from './base';
 import { InstitutionShortItem } from './institution';
-import { LanguageItem } from './language';
 
 /**
  * Участник этапа конкурса для голосования
@@ -26,6 +25,18 @@ export interface VotingParticipant {
 
   /** Источник видео участника */
   videoSource: CompetitionVideoSource;
+
+  /** Оценка за интервью */
+  interviewScore: number;
+
+  /** Оценка за голосование */
+  votingScore: number;
+
+  /** Флаг, указывающий, оценен ли участник */
+  isEvaluated: boolean;
+
+  /** Флаг, указывающий, является ли участник "Учителем года" */
+  isTeacherOfYear: boolean;
 }
 
 /**

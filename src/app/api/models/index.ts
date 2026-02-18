@@ -35,3 +35,4 @@ export * from './teacher-of-year';
 export * from './test-result';
 export * from './work';
 export * from './competitions';
+export * from './erp';

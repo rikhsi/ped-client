@@ -15,3 +15,4 @@ export * from './prefix';
 export * from './appeal';
 export * from './certificate';
 export * from './breakpoint';
+export * from './direction';

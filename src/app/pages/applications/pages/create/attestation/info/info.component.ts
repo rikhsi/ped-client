@@ -9,7 +9,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { RouteParam } from '@constants';
+import { PRIVATE_INSTITUTION_DIRECTIONS, RouteParam } from '@constants';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { AttestationInfoService } from '@pages/applications/services/attestation';
 import { SelectDefaultComponent, ItemComponent } from '@shared/components';
@@ -21,6 +21,7 @@ import { AuthService } from '@core/services';
 import { ApplicationAgreementCardComponent } from '@pages/applications/components';
 import { transformTextToBool } from '@pages/applications/utils';
 import { ApplicationFormLayoutService } from '@layouts/services';
+import { AttestationType } from '@api/models';
 
 @Component({
   selector: 'ped-info',
@@ -50,10 +51,20 @@ export class InfoComponent implements OnInit {
   readonly isEndless = computed(() => this.certificate()?.isEndless);
 
   readonly attestationTypeList = computed(() => {
-    const list = this.aiService.attestationTypeList();
-    const hideList = this.aiService.attestationTypeHideList();
+    const { eduDirection } =
+      this.aclService.attestationHelperForm.getRawValue();
 
-    return list.filter((type) => !hideList.includes(type));
+    const isPrivateInstitution =
+      PRIVATE_INSTITUTION_DIRECTIONS.includes(eduDirection);
+
+    const list = this.aiService.attestationTypeList();
+    const hideSet = new Set(this.aiService.attestationTypeHideList());
+
+    if (isPrivateInstitution) {
+      hideSet.add(AttestationType.ANOTHERONE);
+    }
+
+    return list.filter((type) => !hideSet.has(type));
   });
 
   get agreementForm() {

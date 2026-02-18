@@ -45,7 +45,8 @@ export class ToyPointingComponent implements OnInit {
     private nmRef: NzModalRef<any, VotingVideoSourcePayload>,
     private api: CompetitionsApiService,
     private fb: FormBuilder,
-    @Inject(NZ_MODAL_DATA) private data: number,
+    @Inject(NZ_MODAL_DATA)
+    private data: number,
   ) {}
 
   ngOnInit(): void {

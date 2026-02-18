@@ -41,6 +41,22 @@
             {{ theme() }}
           </p>
         </div>
+
+        @if (isTeacherOfYear()) {
+          <div class="info-row">
+            <p class="label">{{ t("prop.interview_score") }}:</p>
+            <p class="value">
+              {{ interviewScore() }}
+            </p>
+          </div>
+
+          <div class="info-row">
+            <p class="label">{{ t("prop.scoring_score") }}:</p>
+            <p class="value">
+              {{ votingScore() }}
+            </p>
+          </div>
+        }
       </div>
     </div>
 

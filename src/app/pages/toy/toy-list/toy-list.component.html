@@ -6,7 +6,12 @@
       <div class="right">
         <p class="mwp">
           {{ t("prop.main_work_place") }}:
-          <span class="name">Chilonzor tumani</span>
+          <span class="name">{{ erpItem()?.district?.name }}</span
+          ><br />
+          {{ t("prop.last_updated_date") }}:
+          <span class="name">{{
+            erpItem()?.updatedAt | date: "dd.MM.yyyy"
+          }}</span>
         </p>
 
         <button
@@ -14,10 +19,11 @@
           nzType="primary"
           class="refresh"
           (click)="refresh$.next()"
-          [nzLoading]="isLoading()"
+          [nzLoading]="isUpdating()"
+          class="refresh"
         >
           <span nz-icon nzType="o:refresh"></span>
-          {{ t("action.refresh") }}
+          <span class="text"> {{ t("action.refresh") }}</span>
         </button>
       </div>
     </div>
@@ -31,13 +37,17 @@
       >
         @for (item of items(); track item) {
           <ped-toy-card
+            [ngClass]="{ active: item.isTeacherOfYear }"
             [fullName]="item.pedagogue | fullname"
             [regionName]="item.institution.district?.name"
             [districtName]="item.institution.district.region?.name"
             [institutionName]="item.institution?.name"
             [subjectName]="item.subject?.name"
             [theme]="item.videoSource?.name"
-            (pointingClick)="onPointing(item.videoSource.id)"
+            [isTeacherOfYear]="item.isTeacherOfYear"
+            [interviewScore]="item.interviewScore"
+            [votingScore]="item.votingScore"
+            (pointingClick)="onPointing(item?.videoSource?.id)"
           />
         }
       </ped-box-infinite>
