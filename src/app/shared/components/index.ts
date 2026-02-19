@@ -14,3 +14,4 @@ export * from './table/table.component';
 export * from './collapsible-card/collapsible-card.component';
 export * from './item/item.component';
 export * from './tabs/tabs.component';
+export * from './swiper/index';

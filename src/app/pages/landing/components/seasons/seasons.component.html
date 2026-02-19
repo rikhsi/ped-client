@@ -3,72 +3,37 @@
 
   @if (isLoading()) {
     <ped-loading />
-  } @else if (chunkedSeasons().length) {
-    <div class="carousel-container">
-      <div
-        class="carousel-track"
-        [style.transform]="'translateX(-' + currentSlide() * 100 + '%)'"
-        (touchstart)="onTouchStart($event)"
-        (touchend)="onTouchEnd($event)"
-      >
-        @for (chunk of chunkedSeasons(); track $index) {
-          <div class="carousel-slide">
-            <div class="seasons-section">
-              @for (season of chunk; track season.id) {
-                <div class="season-card">
-                  <div class="left">
-                    <div class="top">
-                      <ped-button-icon [icon]="'o:folder'" />
-                      <p>{{ season.name }}</p>
-                    </div>
-                    <p class="bottom">
-                      {{ season.description }}
-                    </p>
-                    <p class="more-info" (click)="handleViewDetails()">
-                      {{ t("actions.view_details") }}
-                      <span nz-icon nzType="o:arrowRight" class="icon"></span>
-                    </p>
-                  </div>
-
-                  <div class="right">
-                    <img [src]="getSeasonImage(season)" [alt]="season.name" />
-                  </div>
+  } @else if (!!seasons()?.length) {
+    <div class="swiper-wrapper-container">
+      <ped-swiper-container #swiper [options]="swiperOptions()">
+        @for (season of seasons(); track season.id) {
+          <swiper-slide>
+            <div class="season-card">
+              <div class="left">
+                <div class="top">
+                  <ped-button-icon [icon]="'o:folder'" />
+                  <p>{{ season.name }}</p>
                 </div>
-              }
+                <p class="bottom">
+                  {{ season.description }}
+                </p>
+                <p class="more-info" (click)="handleViewDetails()">
+                  {{ t("actions.view_details") }}
+                  <span nz-icon nzType="o:arrowRight" class="icon"></span>
+                </p>
+              </div>
+
+              <div class="right">
+                <img [src]="getSeasonImage(season)" [alt]="season.name" />
+              </div>
             </div>
-          </div>
+          </swiper-slide>
         }
-      </div>
+      </ped-swiper-container>
 
-      <!-- Navigation arrows -->
-      <button
-        class="carousel-arrow carousel-arrow-prev"
-        (click)="prevSlide()"
-        aria-label="Previous"
-      >
-        <span nz-icon nzType="o:arrowLeft"></span>
-      </button>
-      <button
-        class="carousel-arrow carousel-arrow-next"
-        (click)="nextSlide()"
-        aria-label="Next"
-      >
-        <span nz-icon nzType="o:arrowRight"></span>
-      </button>
+      <button class="swiper-btn prev-btn" (click)="swiper?.prev()">‹</button>
 
-      <!-- Dots indicator -->
-      @if (totalSlides() > 1) {
-        <div class="carousel-dots">
-          @for (slide of chunkedSeasons(); track $index) {
-            <button
-              class="carousel-dot"
-              [class.active]="currentSlide() === $index"
-              (click)="goToSlide($index)"
-              [attr.aria-label]="'Go to slide ' + ($index + 1)"
-            ></button>
-          }
-        </div>
-      }
+      <button class="swiper-btn next-btn" (click)="swiper?.next()">›</button>
     </div>
   } @else {
     <div class="empty-state">
